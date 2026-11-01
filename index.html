@@ -154,13 +154,36 @@ button{cursor:pointer}
 .form select,.form input{padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);min-width:0}
 .btn{border:none;background:var(--jade);color:#fff;border-radius:8px;padding:10px 16px;font-weight:600}
 .plan{margin-top:18px;border-top:1px solid var(--line);padding-top:16px}
-.plan h4{font-family:var(--f-display);font-size:21px;margin:0}
 .plan .sum{display:flex;gap:16px;flex-wrap:wrap;font-size:13.5px;color:var(--muted);margin:6px 0 12px}
 .plan .sum b{color:var(--ink)}
 .day{display:grid;grid-template-columns:62px minmax(0,1fr);gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
 .day:last-child{border-bottom:none}
 .day .dl{font-family:var(--f-display);font-weight:800;font-size:15px;color:var(--jade)}
 .day p{margin:0;font-size:14px}
+.thumb{aspect-ratio:16/9;border-radius:7px;background:linear-gradient(135deg,var(--jade-soft),var(--marigold-soft));background-size:cover;background-position:center;position:relative;overflow:hidden;max-width:100%}
+.thumb .ph{position:absolute;inset:auto 8px 6px auto;font-size:11px;color:var(--muted)}
+.thumb.has .ph{display:none}
+.card .thumb{margin:-4px -4px 2px}
+.cover{aspect-ratio:16/9;border-radius:var(--r);background:linear-gradient(135deg,var(--jade-soft),var(--marigold-soft));background-size:cover;background-position:center;margin:12px 0 8px;display:flex;align-items:flex-end;max-width:100%;overflow:hidden}
+.cover .cap{font-size:11.5px;background:rgba(0,0,0,.45);color:#fff;padding:3px 8px;border-radius:0 6px 0 0}
+.cover .cap a{color:#fff}
+.gallery{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}
+.gallery a{flex:none;width:110px;aspect-ratio:4/3;border-radius:6px;background-size:cover;background-position:center;border:1px solid var(--line)}
+.intro p{margin:0 0 10px}
+.intro p:first-child{font-size:16px}
+.wiki{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px;font-size:14px;color:var(--ink)}
+.wiki .src{font-size:12px;color:var(--muted);margin-top:6px}
+.wiki .src a{color:var(--jade)}
+.myplan{background:var(--surface);border:1.5px solid var(--jade);border-radius:var(--r);padding:14px;margin-top:16px}
+.myplan-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.myplan-h b{font-family:var(--f-display);font-size:20px;color:var(--jade)}
+.myplan-h span{font-size:12px;color:var(--muted)}
+.form3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.myplan .plan{margin-top:12px;padding-top:12px}
+.plan-name{font-family:var(--f-display);font-size:21px;margin:0}
+.slots{display:flex;flex-direction:column;gap:4px}
+.slots p{margin:0;font-size:14px;display:grid;grid-template-columns:44px minmax(0,1fr);gap:6px}
+.buoi{font-size:12px;font-weight:600;color:var(--muted);padding-top:1px}
 .rate-row{display:grid;grid-template-columns:minmax(0,1.3fr) 70px 90px;gap:8px;margin-bottom:8px}
 .rate-row input{padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);min-width:0}
 .rate-head{display:grid;grid-template-columns:minmax(0,1.3fr) 70px 90px;gap:8px;font-size:12px;color:var(--muted);margin-bottom:4px}
@@ -179,6 +202,7 @@ footer{border-top:1px solid var(--line);padding-block:20px 30px;color:var(--mute
   .tools{grid-template-columns:1fr}
 }
 @media (max-width:480px){
+  .form3{grid-template-columns:1fr 1fr}
   .strip-list{grid-template-columns:1fr}
   .form{grid-template-columns:1fr}
   .facts{grid-template-columns:1fr 1fr}
@@ -237,8 +261,9 @@ footer{border-top:1px solid var(--line);padding-block:20px 30px;color:var(--mute
   <div class="tools">
     <section class="panel" aria-labelledby="planH">
       <h3 id="planH">Lập lịch trình tự động</h3>
-      <p>Chọn nơi xuất phát, số ngày và ngân sách. Trang chọn điểm đến đang đẹp nhất trong tháng mà vẫn vừa túi tiền và vừa thời gian đi lại.</p>
+      <p>Chọn nơi muốn đến, hoặc để trang tự chọn nơi đang đẹp nhất trong tháng mà vẫn vừa túi tiền. Đổi bất kỳ ô nào, lịch trình lập lại ngay.</p>
       <div class="form">
+        <label style="grid-column:1/-1">Muốn đến<select id="pDest"></select></label>
         <label>Xuất phát từ<select id="pFrom"></select></label>
         <label>Số ngày<select id="pDays"><option>2</option><option selected>3</option><option>4</option><option>5</option><option>7</option></select></label>
         <label>Ngân sách mỗi người (triệu đồng)<input id="pBudget" type="number" min="1" step="0.5" value="5"></label>
@@ -246,11 +271,8 @@ footer{border-top:1px solid var(--line);padding-block:20px 30px;color:var(--mute
           <option value="">Gì cũng được</option><option value="bien">Biển đảo</option><option value="nui">Núi rừng</option>
           <option value="van-hoa">Văn hóa, lễ hội</option><option value="sinh-thai">Sinh thái, sông nước</option><option value="tam-linh">Tâm linh</option>
         </select></label>
-        <label style="grid-column:1/-1">Đi cùng<select id="pWho">
-          <option value="ban">Bạn bè, cặp đôi</option><option value="tre">Gia đình có trẻ nhỏ</option><option value="gia">Có người lớn tuổi</option>
-        </select></label>
+        <label style="grid-column:1/-1">Đi cùng<select id="pWho"></select></label>
       </div>
-      <div style="margin-top:14px"><button class="btn" id="pGo">Lập lịch trình</button></div>
       <div class="plan" id="plan"></div>
     </section>
 
@@ -472,6 +494,107 @@ const D = [
  {id:"muicamau",ten:"Mũi Cà Mau",tinh:"camau",lat:8.6,lon:104.72,kieu:["sinh-thai"],dep:[12,1,2,3,4],tranh:[],chi:800,ngay:2,mo:"Điểm cực Nam Tổ quốc, rừng đước, cột mốc tọa độ.",mon:["Cua Cà Mau","Ba khía","Lẩu mắm U Minh"],goi:["Cột mốc tọa độ GPS 0001","Rừng đước"]},
  {id:"baclieu",ten:"Bạc Liêu",tinh:"camau",cu:"Bạc Liêu",lat:9.29,lon:105.72,kieu:["van-hoa"],dep:[12,1,2,3],tranh:[],chi:700,ngay:1,mo:"Nhà Công tử Bạc Liêu, cánh đồng điện gió, quê hương cố nhạc sĩ Cao Văn Lầu.",mon:["Bánh tằm khoai mì","Bún bò cay"],goi:["Nhà Công tử Bạc Liêu","Cánh đồng điện gió"]},
 ];
+/* ===== Lời giới thiệu chi tiết và từ khóa tìm ảnh trên Wikipedia ===== */
+const GT = {
+ halong:["Vịnh Hạ Long được UNESCO công nhận là Di sản thiên nhiên thế giới năm 1994, lần thứ hai năm 2000, và năm 2023 được mở rộng thành quần thể vịnh Hạ Long – quần đảo Cát Bà.","Vịnh có gần 2.000 hòn đảo, phần lớn là đảo đá vôi nhô lên giữa mặt nước xanh, ẩn bên trong là những hang động lớn như Sửng Sốt, Thiên Cung, Đầu Gỗ.","Cách đẹp nhất để cảm nhận vịnh là ngủ một đêm trên du thuyền: chiều chèo kayak qua hang Luồn, sáng sớm ngắm mặt trời lên giữa các đảo đá."],
+ coto:["Cô Tô là quần đảo xa bờ của Quảng Ninh, đi tàu cao tốc từ cảng Cái Rồng (Vân Đồn) khoảng hơn một giờ.","Nước biển ở đây trong và xanh hơn hẳn vùng vịnh, bãi Hồng Vàn, bãi Vàn Chảy cát trắng mịn, con đường ven biển uốn quanh đảo rất hợp để đạp xe.","Nên đi vào ngày thường, theo dõi thời tiết sát ngày vì khi biển động tàu sẽ tạm dừng chạy."],
+ yentu:["Yên Tử là nơi vua Trần Nhân Tông xuất gia tu hành và lập ra Thiền phái Trúc Lâm, được coi là kinh đô Phật giáo của Đại Việt.","Từ chân núi đến chùa Đồng trên đỉnh cao hơn 1.000 m là cả một hệ thống chùa, am, tháp ẩn trong rừng trúc và tùng cổ thụ.","Mùa lễ hội đầu xuân rất đông người hành hương, ai thích yên tĩnh nên đi vào những tháng cuối năm."],
+ "hanoi-phoco":["Phố cổ Hà Nội là khu buôn bán lâu đời quanh hồ Hoàn Kiếm, mỗi con phố xưa gắn với một nghề như Hàng Bạc, Hàng Mã, Hàng Đường.","Ngoài phố cổ, Thủ đô còn có Văn Miếu – Quốc Tử Giám, Hoàng thành Thăng Long, Lăng Chủ tịch Hồ Chí Minh và hồ Tây.","Hà Nội đẹp nhất vào mùa thu, khi trời mát, hoa sữa nở và cốm làng Vòng vào mùa."],
+ hagiang:["Cao nguyên đá Đồng Văn là công viên địa chất toàn cầu được UNESCO công nhận, trải rộng trên bốn huyện vùng cực Bắc của Hà Giang cũ.","Cung đường qua đèo Mã Pí Lèng nhìn xuống hẻm vực sông Nho Quế được coi là một trong những đoạn đường đẹp nhất Việt Nam, kết thúc ở cột cờ Lũng Cú nơi địa đầu Tổ quốc.","Tháng 10–11 tam giác mạch nở hồng khắp sườn núi. Đường đèo nhiều khúc cua gấp, nên thuê người lái xe địa phương nếu chưa quen."],
+ hoangsuphi:["Hoàng Su Phì nằm ở phía tây Hà Giang cũ, nổi tiếng với những thửa ruộng bậc thang được công nhận Di tích quốc gia đặc biệt.","Ruộng ở đây do đồng bào Dao, Nùng, La Chí khai phá, uốn theo sườn núi cao, ít khách hơn Mù Cang Chải nên rất yên bình.","Mùa lúa chín thường rơi vào cuối tháng 9 đến đầu tháng 10."],
+ sapa:["Sa Pa là thị trấn nghỉ mát trong sương do người Pháp xây dựng, nằm dưới chân dãy Hoàng Liên Sơn.","Từ đây có cáp treo lên đỉnh Fansipan cao 3.143 m, nóc nhà Đông Dương, và nhiều cung đi bộ qua các bản Cát Cát, Lao Chải, Tả Van của người Mông, người Dao.","Mùa đông có thể có băng tuyết, tháng 9 lúa chín vàng thung lũng Mường Hoa."],
+ mucangchai:["Mù Cang Chải thuộc Yên Bái cũ, có hơn 2.000 ha ruộng bậc thang, trong đó vùng ruộng ở La Pán Tẩn, Chế Cu Nha, Dế Xu Phình là Di tích quốc gia đặc biệt.","Đồi Mâm Xôi với những thửa ruộng xoáy tròn như mâm xôi là hình ảnh quen thuộc trên ảnh du lịch Việt Nam.","Đến Mù Cang Chải phải vượt đèo Khau Phạ, một trong tứ đại đỉnh đèo miền Bắc."],
+ babe:["Hồ Ba Bể là hồ nước ngọt tự nhiên lớn nhất Việt Nam, nằm trong Vườn quốc gia Ba Bể, được công nhận là khu Ramsar và vườn di sản ASEAN.","Đi thuyền trên hồ sẽ qua động Puông có sông Năng chảy xuyên núi, ao Tiên và đảo Bà Góa gắn với truyền thuyết tạo nên hồ.","Nên nghỉ lại nhà sàn người Tày ở bản Pác Ngòi để thưởng thức cá hồ và xôi trứng kiến."],
+ banGioc:["Thác Bản Giốc nằm trên sông Quây Sơn ở biên giới Việt – Trung, là một trong những thác nước tự nhiên lớn nhất Đông Nam Á.","Thác chia nhiều tầng, nước đổ trắng xóa giữa núi đá và ruộng lúa. Có thể đi bè sát chân thác.","Cách thác vài km là động Ngườm Ngao với nhũ đá rất đẹp. Tháng 9–10 vừa nhiều nước vừa có lúa chín."],
+ pacbo:["Khu di tích Pác Bó là nơi Chủ tịch Hồ Chí Minh trở về nước năm 1941 sau 30 năm bôn ba, trực tiếp lãnh đạo cách mạng.","Di tích gồm hang Cốc Bó, suối Lê Nin trong xanh, núi Các Mác và lán Khuổi Nặm, được xếp hạng Di tích quốc gia đặc biệt.","Có thể kết hợp với thác Bản Giốc và hồ Thang Hen trong cùng chuyến đi Cao Bằng."],
+ mauson:["Mẫu Sơn là khu nghỉ mát trên núi cao hơn 1.500 m, cách thành phố Lạng Sơn khoảng 30 km.","Đây là nơi gần Hà Nội nhất có thể xuất hiện băng giá vào những đợt rét đậm, thu hút nhiều người đi săn băng.","Lạng Sơn còn nổi tiếng với vịt quay, khâu nhục và chợ Đông Kinh, chợ Kỳ Lừa."],
+ mocchau:["Mộc Châu là cao nguyên cao trên 1.000 m của Sơn La, khí hậu mát quanh năm, nổi tiếng với đồi chè, trang trại bò sữa và các vườn mận, đào.","Mỗi mùa có một loài hoa: cải trắng và dã quỳ cuối năm, mận trắng đầu năm.","Đồi chè trái tim, rừng thông bản Áng và thác Dải Yếm là những điểm không nên bỏ lỡ."],
+ taxua:["Tà Xùa thuộc huyện Bắc Yên cũ của Sơn La, ở độ cao khoảng 2.000 m, được gọi là thiên đường săn mây của miền Bắc.","Sống lưng khủng long là dải núi hẹp nhô lên giữa biển mây, chỉ đi bộ được một đoạn ngắn và cần cẩn thận.","Mùa săn mây đẹp từ tháng 10 đến tháng 4 năm sau, nên dậy từ 5 giờ sáng."],
+ dienbien:["Điện Biên Phủ là nơi diễn ra chiến dịch lịch sử năm 1954 kết thúc 9 năm kháng chiến chống thực dân Pháp.","Các di tích đồi A1, hầm chỉ huy của tướng Đờ Cát, Sở chỉ huy chiến dịch ở Mường Phăng và Bảo tàng Chiến thắng lịch sử Điện Biên Phủ được gìn giữ chu đáo.","Tháng 3 hoa ban nở trắng thung lũng Mường Thanh, cũng là dịp lễ hội Hoa Ban."],
+ denhung:["Khu di tích lịch sử Đền Hùng trên núi Nghĩa Lĩnh là nơi thờ các Vua Hùng, những người có công dựng nước.","Tín ngưỡng thờ cúng Hùng Vương được UNESCO ghi danh là Di sản văn hóa phi vật thể đại diện của nhân loại.","Dịp Giỗ Tổ ngày 10 tháng 3 âm lịch rất đông người về dâng hương, nên đi sớm."],
+ tamdao:["Tam Đảo là khu nghỉ mát trên núi do người Pháp xây dựng, cách Hà Nội khoảng 80 km, cao gần 900 m.","Khí hậu mát quanh năm nên rất hợp trốn nóng mùa hè, cuối tuần thường đông khách Hà Nội.","Nhà thờ đá, thác Bạc, cổng trời và những món su su, gà đồi là đặc trưng nơi đây."],
+ maichau:["Mai Châu là thung lũng của đồng bào Thái thuộc Hòa Bình cũ, cách Hà Nội khoảng 140 km.","Bản Lác, bản Pom Coọng có nhà sàn đón khách, có thể thuê xe đạp đi giữa đồng lúa và xem múa xòe buổi tối.","Mùa lúa chín vào tháng 5–6 và tháng 9–10."],
+ lim:["Bắc Ninh là quê hương của dân ca Quan họ, Di sản văn hóa phi vật thể đại diện của nhân loại.","Nơi đây có nhiều chùa cổ như chùa Bút Tháp, chùa Dâu, chùa Phật Tích, cùng làng tranh Đông Hồ nổi tiếng.","Hội Lim ngày 13 tháng Giêng là dịp nghe Quan họ đặc sắc nhất trong năm."],
+ catba:["Cát Bà là đảo lớn nhất trong quần đảo cùng tên, nằm trong quần thể di sản thế giới vịnh Hạ Long – quần đảo Cát Bà.","Vịnh Lan Hạ có ít tàu hơn vịnh Hạ Long, nhiều bãi cát nhỏ và làng chài nổi; vườn quốc gia Cát Bà là nơi sống của loài voọc Cát Bà quý hiếm.","Có thể đi từ Hải Phòng bằng cáp treo vượt biển hoặc phà, từ Hạ Long đi tàu qua Tuần Châu."],
+ conson:["Côn Sơn – Kiếp Bạc là Di tích quốc gia đặc biệt gắn với Đức Thánh Trần Hưng Đạo và danh nhân Nguyễn Trãi, nay thuộc Hải Phòng.","Đền Kiếp Bạc thờ Trần Hưng Đạo, còn chùa Côn Sơn là nơi Nguyễn Trãi sống những năm cuối đời, với lối đá lên Bàn Cờ Tiên.","Lễ hội mùa thu vào tháng 8 âm lịch, trùng ngày giỗ Đức Thánh Trần."],
+ phohien:["Phố Hiến từng là thương cảng sầm uất bậc nhất Đàng Ngoài thế kỷ 17, nên có câu \"Thứ nhất Kinh Kỳ, thứ nhì Phố Hiến\".","Ngày nay còn lại cụm di tích đền Mẫu, chùa Chuông, Văn Miếu Xích Đằng, hồ Bán Nguyệt.","Tháng 7–8 là mùa nhãn lồng Hưng Yên, đặc sản từng dùng để tiến vua."],
+ trangan:["Quần thể danh thắng Tràng An là Di sản văn hóa và thiên nhiên thế giới đầu tiên của Việt Nam và Đông Nam Á.","Đi thuyền qua những hang xuyên núi đá vôi, ghé các đền cổ; leo gần 500 bậc lên Hang Múa để ngắm toàn cảnh Tam Cốc.","Quanh đó là cố đô Hoa Lư, chùa Bái Đính. Cuối tháng 5, lúa chín vàng hai bên sông Ngô Đồng."],
+ tamchuc:["Chùa Tam Chúc nằm bên hồ Tam Chúc thuộc Hà Nam cũ, là một trong những quần thể chùa có quy mô lớn nhất Việt Nam.","Nơi đây từng tổ chức Đại lễ Phật đản Liên Hợp Quốc năm 2019.","Đi thuyền trên hồ ngắm núi Thất Tinh là trải nghiệm nên thử."],
+ puluong:["Pù Luông là khu bảo tồn thiên nhiên ở phía tây Thanh Hóa, giáp Mai Châu.","Ruộng bậc thang, guồng nước tre và những homestay nhà sàn giữa thung lũng làm nên vẻ đẹp yên bình, ít đông đúc.","Đi bộ từ bản Đôn qua bản Hiêu, tắm thác Hiêu là lịch trình được nhiều người chọn."],
+ samson:["Sầm Sơn là bãi biển lâu đời của miền Bắc, cách Hà Nội khoảng 170 km.","Biển dài, nhiều dịch vụ, nhiều khách sạn ở mọi mức giá, hợp gia đình đi nghỉ hè.","Nên hỏi giá kỹ trước khi ăn hải sản và thuê ghế ở bãi biển vào cao điểm."],
+ kimlien:["Khu di tích Kim Liên ở Nam Đàn, Nghệ An là quê nội và quê ngoại của Chủ tịch Hồ Chí Minh.","Làng Sen còn ngôi nhà nơi Bác sống thời niên thiếu, làng Hoàng Trù có ngôi nhà nơi Bác sinh ra.","Dịp 19/5 có Lễ hội Làng Sen. Vào cửa miễn phí."],
+ cualo:["Cửa Lò là bãi biển nổi tiếng của Nghệ An, cát trắng mịn, nước trong.","Có thể đi thuyền ra đảo Lan Châu, đảo Song Ngư, chiều tối thưởng thức mực nhảy, hải sản tươi.","Thành phố Vinh gần đó có cháo lươn, bánh mướt nổi tiếng."],
+ thiencam:["Thiên Cầm là bãi biển yên tĩnh của Hà Tĩnh, có núi Thiên Cầm và chùa Cầm Sơn.","Khách ít hơn Cửa Lò, hợp nghỉ dưỡng gia đình.","Trên đường có thể ghé Khu di tích Ngã ba Đồng Lộc tưởng nhớ 10 cô gái thanh niên xung phong."],
+ phongnha:["Vườn quốc gia Phong Nha – Kẻ Bàng là Di sản thiên nhiên thế giới, nổi tiếng với hệ thống hang động đá vôi, trong đó có Sơn Đoòng là hang lớn nhất thế giới.","Khách phổ thông có thể đi thuyền vào động Phong Nha, đi bộ trong động Thiên Đường, đu dây và tắm bùn ở hang Tối.","Mùa mưa lũ khoảng tháng 9 đến tháng 11, nhiều tour hang tạm dừng."],
+ vinhmoc:["Quảng Trị là vùng đất gắn với chiến tranh chống Mỹ, với Thành cổ Quảng Trị, cầu Hiền Lương – sông Bến Hải từng chia cắt hai miền.","Địa đạo Vịnh Mốc là làng hầm ba tầng sâu dưới lòng đất, nơi người dân sống và chiến đấu suốt nhiều năm.","Nên đi cùng người hướng dẫn tại điểm để hiểu đủ câu chuyện lịch sử."],
+ hue:["Quần thể di tích Cố đô Huế là Di sản văn hóa thế giới, kinh đô của triều Nguyễn từ 1802 đến 1945.","Đại Nội, các lăng vua Tự Đức, Minh Mạng, Khải Định, chùa Thiên Mụ bên dòng sông Hương tạo nên vẻ trầm mặc riêng.","Nhã nhạc cung đình Huế là Di sản văn hóa phi vật thể đại diện của nhân loại, có thể nghe ca Huế trên thuyền rồng buổi tối."],
+ danang:["Đà Nẵng có bãi biển Mỹ Khê dài, cát mịn, bán đảo Sơn Trà, danh thắng Ngũ Hành Sơn và khu du lịch Bà Nà trên núi.","Thành phố sạch, giao thông thuận tiện, có sân bay quốc tế nên là điểm khởi đầu cho cả chuyến đi Huế, Hội An.","Cầu Rồng phun lửa, phun nước vào tối thứ Bảy và Chủ nhật."],
+ hoian:["Phố cổ Hội An là Di sản văn hóa thế giới, từng là thương cảng quốc tế sầm uất từ thế kỷ 16–17.","Những dãy nhà gỗ, hội quán người Hoa, chùa Cầu và đèn lồng rực rỡ mỗi tối làm nên nét riêng không nơi nào có.","Đêm rằm hằng tháng phố cổ tắt đèn điện, chỉ thắp đèn lồng. Mùa mưa lũ phố thường ngập."],
+ culaocham:["Cù Lao Chàm gồm 8 đảo nhỏ, cách Hội An khoảng 15 km, là khu dự trữ sinh quyển thế giới.","Nước trong, san hô đẹp, rất hợp lặn ngắm san hô; đảo nói không với túi ni lông.","Đảo thường hạn chế đón khách trong mùa biển động cuối năm."],
+ myson:["Thánh địa Mỹ Sơn là quần thể đền tháp Chăm Pa, Di sản văn hóa thế giới, được xây dựng liên tục từ thế kỷ 4 đến thế kỷ 13.","Các tháp gạch nằm trong thung lũng kín giữa núi, kỹ thuật xây gạch không vữa đến nay vẫn còn nhiều bí ẩn.","Nên đến sớm để tránh nắng, có biểu diễn múa Chăm tại khu di tích."],
+ lyson:["Lý Sơn là huyện đảo của Quảng Ngãi, hình thành từ núi lửa, nổi tiếng với tỏi và cảnh quan đá bazan.","Cổng Tò Vò lúc hoàng hôn, đỉnh Thới Lới và đảo Bé nước trong vắt là những điểm đẹp nhất.","Đây cũng là quê hương của Hải đội Hoàng Sa xưa, có Âm linh tự và lễ Khao lề thế lính Hoàng Sa."],
+ mangden:["Măng Đen là cao nguyên ở độ cao khoảng 1.200 m thuộc Kon Tum cũ, được ví như \"Đà Lạt thứ hai\".","Rừng thông, hồ Đăk Ke, thác Pa Sỹ và khí hậu se lạnh quanh năm, còn khá hoang sơ.","Đầu năm có mai anh đào nở dọc các con đường."],
+ quynhon:["Quy Nhơn có biển đẹp mà giá còn mềm hơn Nha Trang, Đà Nẵng.","Kỳ Co nước xanh ngọc, Eo Gió hùng vĩ, Hòn Khô có san hô; trong thành phố có tháp Đôi, tháp Bánh Ít của người Chăm.","Vùng đất võ Bình Định cũ còn có Bảo tàng Quang Trung ở Tây Sơn."],
+ pleiku:["Pleiku là thủ phủ phố núi của Gia Lai, có Biển Hồ trong xanh và đồi chè Biển Hồ với hàng thông thẳng tắp.","Núi lửa Chư Đăng Ya đã ngừng hoạt động, tháng 11 dã quỳ nở vàng rực, có lễ hội hoa dã quỳ.","Phở khô Gia Lai hai tô là món nên ăn sáng."],
+ phuyen:["Phú Yên là vùng biển hoang sơ, nổi tiếng sau bộ phim \"Tôi thấy hoa vàng trên cỏ xanh\".","Gành Đá Đĩa với những cột đá bazan xếp chồng, Mũi Điện là nơi đón bình minh sớm nhất đất liền, Bãi Xép hoang sơ.","Mắt cá ngừ đại dương và sò huyết đầm Ô Loan là đặc sản."],
+ buonmathuot:["Buôn Ma Thuột là thủ phủ cà phê của Việt Nam, trung tâm vùng Tây Nguyên.","Bảo tàng Thế giới Cà phê, buôn Đôn với nhà dài Ê Đê, hồ Lắk và thác Dray Nur là những điểm nên đến.","Không gian văn hóa cồng chiêng Tây Nguyên là Di sản văn hóa phi vật thể đại diện của nhân loại."],
+ nhatrang:["Nha Trang có vịnh biển được xem là một trong những vịnh đẹp nhất thế giới.","Tour 4 đảo, lặn ngắm san hô ở Hòn Mun, tắm bùn khoáng, tháp Bà Ponagar là những trải nghiệm quen thuộc.","Mùa mưa rơi vào tháng 10–11, khác với miền Bắc."],
+ vinhhy:["Vĩnh Hy thuộc Ninh Thuận cũ, vùng ít mưa nhất cả nước nên đi được gần như quanh năm.","Vịnh Vĩnh Hy nước trong, Hang Rái có thảm rêu xanh trên đá lúc bình minh, đồi cát Nam Cương rộng mênh mông.","Đây cũng là vùng văn hóa Chăm với tháp Pô Klong Garai và làng gốm Bàu Trúc."],
+ dalat:["Đà Lạt là thành phố trên cao nguyên Lâm Viên, cao khoảng 1.500 m, khí hậu mát quanh năm.","Hồ Xuân Hương, hồ Tuyền Lâm, đồi chè Cầu Đất, những biệt thự kiểu Pháp và chợ đêm làm nên sức hút của thành phố ngàn hoa.","Tháng 11 có dã quỳ và cỏ hồng, tháng 1–2 mai anh đào nở."],
+ muine:["Mũi Né thuộc Bình Thuận cũ, nổi tiếng với đồi cát bay, đồi cát trắng và suối Tiên.","Làng chài Mũi Né buổi sáng nhộn nhịp thuyền thúng. Gió mạnh mùa khô thu hút người chơi lướt ván diều.","Phan Thiết gần đó có nước mắm, bánh căn, gỏi cá mai nổi tiếng."],
+ tadung:["Hồ Tà Đùng thuộc Đắk Nông cũ, là hồ thủy điện với hơn 30 đảo lớn nhỏ, được ví như vịnh Hạ Long của Tây Nguyên.","Sáng sớm sương phủ mặt hồ rất đẹp; có thể đi thuyền giữa các đảo.","Đường vào khá xa, nên nghỉ lại một đêm để ngắm bình minh."],
+ cattien:["Vườn quốc gia Cát Tiên là khu rừng nhiệt đới lớn của miền Đông Nam Bộ, khu dự trữ sinh quyển thế giới.","Có thể đạp xe trong rừng, đi bộ đến bàu Sấu, đi xe xem thú đêm và thăm trung tâm cứu hộ gấu, linh trưởng.","Mùa khô là thời gian đẹp nhất để đi rừng."],
+ nuiba:["Núi Bà Đen cao gần 1.000 m, được gọi là nóc nhà Nam Bộ.","Có cáp treo lên đỉnh với tượng Phật Bà Tây Bổ Đà Sơn bằng đồng; chùa Bà trên sườn núi là nơi hành hương lâu đời.","Tây Ninh còn có Tòa Thánh Cao Đài và bánh tráng phơi sương Trảng Bàng."],
+ saigon:["TP. Hồ Chí Minh là đô thị lớn nhất cả nước, năng động suốt ngày đêm.","Dinh Độc Lập, nhà thờ Đức Bà, Bưu điện Thành phố, chợ Bến Thành và phố đi bộ Nguyễn Huệ ở trung tâm; địa đạo Củ Chi ở ngoại thành.","Ẩm thực đường phố phong phú: cơm tấm, hủ tiếu, bánh mì, ốc."],
+ vungtau:["Vũng Tàu là bãi biển gần TP. Hồ Chí Minh nhất, nay thuộc thành phố này.","Tượng Chúa Kitô trên núi Nhỏ, ngọn hải đăng, Bãi Sau, Bãi Trước là những điểm quen thuộc; Long Hải, Hồ Tràm gần đó yên tĩnh hơn.","Bánh khọt và lẩu cá đuối là món phải thử."],
+ condao:["Côn Đảo là quần đảo có biển hoang sơ và vườn quốc gia bảo vệ rùa biển, san hô.","Đây cũng là vùng đất thiêng với nhà tù Côn Đảo và nghĩa trang Hàng Dương, nơi an nghỉ của nhiều chiến sĩ cách mạng, trong đó có chị Võ Thị Sáu.","Từ tháng 5 đến tháng 10 là mùa rùa biển lên bãi đẻ trứng."],
+ saddec:["Sa Đéc thuộc Đồng Tháp là thủ phủ hoa kiểng miền Tây với làng hoa Tân Quy Đông hơn trăm năm.","Nhà cổ Huỳnh Thủy Lê gắn với tiểu thuyết \"Người tình\" của Marguerite Duras.","Đẹp nhất vào tháng Chạp khi hoa chuẩn bị đón Tết."],
+ tramchim:["Vườn quốc gia Tràm Chim là khu Ramsar, vùng đất ngập nước đặc trưng của Đồng Tháp Mười.","Nơi đây có nhiều loài chim quý, trong đó có sếu đầu đỏ từng về trú đông.","Mùa nước nổi có cá linh, bông điên điển, đồng sen bạt ngàn."],
+ thoison:["Cù lao Thới Sơn nằm giữa sông Tiền, đối diện thành phố Mỹ Tho.","Đi xuồng ba lá trên rạch dừa, ăn trái cây trong vườn, nghe đờn ca tài tử và uống trà mật ong là trải nghiệm miền Tây quen thuộc.","Đờn ca tài tử Nam Bộ là Di sản văn hóa phi vật thể đại diện của nhân loại."],
+ bentre:["Bến Tre là xứ dừa của miền Tây, nay thuộc Vĩnh Long.","Cồn Phụng, làng nghề kẹo dừa, những con rạch rợp bóng dừa nước tạo nên vẻ yên bình đặc trưng.","Mùa trái cây rộ khoảng tháng 5 đến tháng 8."],
+ caibe:["Chợ nổi Cái Răng là chợ trên sông lớn của miền Tây, họp từ sáng sớm, ghe nào bán gì thì treo hàng lên cây bẹo.","Cần Thơ còn có bến Ninh Kiều, nhà cổ Bình Thủy, vườn trái cây Phong Điền.","Nên ra chợ lúc 5–6 giờ sáng, ăn hủ tiếu ngay trên ghe."],
+ soctrang:["Sóc Trăng có cộng đồng người Khmer đông đúc với hàng trăm ngôi chùa đặc sắc.","Chùa Dơi có hàng nghìn con dơi treo trên cây, chùa Chén Kiểu khảm sành sứ, chùa Đất Sét có tượng nặn bằng đất.","Lễ hội Óc Om Bóc và đua ghe Ngo vào rằm tháng 10 âm lịch là lễ hội lớn nhất trong năm."],
+ phuquoc:["Phú Quốc là hòn đảo lớn nhất Việt Nam, nay thuộc An Giang.","Nam đảo có cáp treo vượt biển ra Hòn Thơm và các bãi lặn san hô; Bắc đảo có vườn quốc gia và những bãi biển hoang sơ; Bãi Sao cát trắng mịn.","Mùa khô từ tháng 11 đến tháng 4 biển phía tây lặng, hoàng hôn rất đẹp."],
+ chaudoc:["Châu Đốc nằm sát biên giới Campuchia, là vùng đất giao thoa văn hóa Kinh, Hoa, Khmer, Chăm.","Miếu Bà Chúa Xứ núi Sam là nơi hành hương lớn của Nam Bộ; lễ hội vía Bà là Di sản văn hóa phi vật thể đại diện của nhân loại.","Rừng tràm Trà Sư mùa nước nổi xanh ngắt, đi xuồng giữa thảm bèo rất đẹp."],
+ hatien:["Hà Tiên là thị xã biển cổ kính với lăng Mạc Cửu, Thạch Động, Mũi Nai.","Có tàu cao tốc từ Hà Tiên đi Phú Quốc, nên thường được kết hợp trong cùng chuyến.","Bánh canh ghẹ và chợ đêm Hà Tiên là đặc trưng nơi đây."],
+ muicamau:["Mũi Cà Mau là điểm cực Nam trên đất liền Việt Nam, nằm trong Vườn quốc gia Mũi Cà Mau.","Rừng đước, rừng mắm vươn ra biển mỗi năm, cột mốc tọa độ quốc gia và biểu tượng con tàu hướng ra biển là điểm check-in quen thuộc.","Cua Cà Mau, ba khía, lẩu mắm U Minh là đặc sản nên thử."],
+ baclieu:["Bạc Liêu, nay thuộc Cà Mau, gắn với giai thoại công tử Bạc Liêu và nhà Công tử còn được giữ lại.","Cánh đồng điện gió ven biển và Khu lưu niệm nghệ thuật đờn ca tài tử Cao Văn Lầu là những điểm nên đến.","Bánh tằm khoai mì và bún bò cay là đặc sản."],
+};
+const WK = {halong:"Vịnh Hạ Long",coto:"Cô Tô đảo",yentu:"Yên Tử","hanoi-phoco":"Phố cổ Hà Nội",hagiang:"Cao nguyên đá Đồng Văn",hoangsuphi:"Ruộng bậc thang Hoàng Su Phì",
+ sapa:"Sa Pa",mucangchai:"Ruộng bậc thang Mù Cang Chải",babe:"Hồ Ba Bể",banGioc:"Thác Bản Giốc",pacbo:"Pác Bó",mauson:"Mẫu Sơn",mocchau:"Mộc Châu",taxua:"Tà Xùa",
+ dienbien:"Đồi A1",denhung:"Đền Hùng",tamdao:"Tam Đảo",maichau:"Mai Châu",lim:"Chùa Bút Tháp",catba:"Đảo Cát Bà",conson:"Côn Sơn – Kiếp Bạc",phohien:"Phố Hiến",
+ trangan:"Quần thể danh thắng Tràng An",tamchuc:"Chùa Tam Chúc",puluong:"Pù Luông",samson:"Sầm Sơn",kimlien:"Khu di tích Kim Liên",cualo:"Cửa Lò",thiencam:"Thiên Cầm",
+ phongnha:"Vườn quốc gia Phong Nha – Kẻ Bàng",vinhmoc:"Địa đạo Vịnh Mốc",hue:"Quần thể di tích Cố đô Huế",danang:"Bãi biển Mỹ Khê",hoian:"Phố cổ Hội An",culaocham:"Cù Lao Chàm",
+ myson:"Thánh địa Mỹ Sơn",lyson:"Đảo Lý Sơn",mangden:"Măng Đen",quynhon:"Kỳ Co Quy Nhơn",pleiku:"Biển Hồ Pleiku",phuyen:"Gành Đá Đĩa",buonmathuot:"Buôn Ma Thuột",
+ nhatrang:"Vịnh Nha Trang",vinhhy:"Vịnh Vĩnh Hy",dalat:"Đà Lạt",muine:"Mũi Né",tadung:"Hồ Tà Đùng",cattien:"Vườn quốc gia Cát Tiên",nuiba:"Núi Bà Đen",saigon:"Dinh Độc Lập",
+ vungtau:"Tượng Chúa Kitô Vua Vũng Tàu",condao:"Côn Đảo",saddec:"Làng hoa Sa Đéc",tramchim:"Vườn quốc gia Tràm Chim",thoison:"Cù lao Thới Sơn",bentre:"Cồn Phụng",
+ caibe:"Chợ nổi Cái Răng",soctrang:"Chùa Dơi",phuquoc:"Phú Quốc",chaudoc:"Miếu Bà Chúa Xứ Núi Sam",hatien:"Hà Tiên",muicamau:"Mũi Cà Mau",baclieu:"Nhà công tử Bạc Liêu"};
+
+/* ===== Ảnh và giới thiệu mở rộng từ Wikipedia tiếng Việt (tải khi xem trên trang web thật) ===== */
+const WIKI = "https://vi.wikipedia.org/w/api.php";
+const anhCache = {};
+try{Object.assign(anhCache, JSON.parse(localStorage.getItem("ddmn_anh")||"{}"))}catch(e){}
+function luuAnh(){try{localStorage.setItem("ddmn_anh",JSON.stringify(anhCache))}catch(e){}}
+async function wikiTrang(d){
+  if(anhCache[d.id]) return anhCache[d.id];
+  const u = WIKI+"?action=query&format=json&origin=*&generator=search&gsrlimit=1&gsrsearch="+encodeURIComponent(WK[d.id]||d.ten)
+    +"&prop=pageimages|extracts|info&exintro=1&explaintext=1&exchars=900&piprop=thumbnail&pithumbsize=1200&inprop=url";
+  const r = await fetch(u); const j = await r.json();
+  const p = j.query && Object.values(j.query.pages||{})[0];
+  if(!p) throw new Error("không có trang");
+  const kq = {tieuDe:p.title, url:p.fullurl, anh:p.thumbnail?p.thumbnail.source:"", trich:p.extract||""};
+  anhCache[d.id]=kq; luuAnh(); return kq;
+}
+async function wikiAnhBo(title){
+  const u = WIKI+"?action=query&format=json&origin=*&generator=images&gimlimit=30&titles="+encodeURIComponent(title)
+    +"&prop=imageinfo&iiprop=url|mime&iiurlwidth=640";
+  const r = await fetch(u); const j = await r.json();
+  const loai = /(flag|logo|map|bản đồ|location|icon|coat|symbol|emblem|commons-|wiki|question|edit|ambox|portal|disambig|sound|audio|signature|chữ ký)/i;
+  return Object.values((j.query&&j.query.pages)||{})
+    .filter(p=>p.imageinfo&&/image\/(jpeg|png|webp)/.test(p.imageinfo[0].mime)&&!loai.test(p.title))
+    .slice(0,8).map(p=>({nho:p.imageinfo[0].thumburl, trang:p.imageinfo[0].descriptionurl, ten:p.title.replace(/^(Tập tin|File):/,"").replace(/\.\w+$/,"")}));
+}
+
 const TMAP = Object.fromEntries(TINH.map(t=>[t.id,t]));
 
 /* ===== Chấm điểm theo tháng ===== */
@@ -492,6 +615,7 @@ function mauThang(d,m){return d.dep.includes(m)?"var(--jade)":d.tranh.includes(m
 const ten = id => TMAP[id].ten;
 const vitri = d => ten(d.tinh) + (d.cu?` (trước là ${d.cu})`:"");
 const tien = n => (n/1000).toLocaleString("vi-VN",{maximumFractionDigits:1})+" triệu";
+const thuong = s => s.charAt(0).toLowerCase()+s.slice(1);
 const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
 /* ===== Trạng thái ===== */
@@ -572,12 +696,26 @@ function veLuoi(){
     if(d.tranh.includes(st.m)) tags.push(`<span class="tag bad">Nên tránh</span>`);
     d.kieu.forEach(k=>tags.push(`<span class="tag">${KIEU[k]}</span>`));
     const note = d.le&&d.le.t.includes(st.m)?d.le.x:(d.nhan&&d.nhan.t.includes(st.m)?d.nhan.x:"");
+    const a=anhCache[d.id];
     return `<button class="card" data-id="${d.id}">
+      <div class="thumb${a&&a.anh?" has":""}" data-anh="${d.id}" ${a&&a.anh?`style="background-image:url('${a.anh}')"`:""}><span class="ph">${KIEU[d.kieu[0]]}</span></div>
       <div class="card-top"><div style="min-width:0"><h3>${esc(d.ten)}</h3><div class="loc">${esc(vitri(d))}</div></div>
       <span class="badge num" style="background:${mauNen(c.s)};color:${mau(c.s)}">${c.s}</span></div>
       <div class="cal" aria-label="Lịch mùa 12 tháng">${Array.from({length:12},(_,i)=>`<span class="${i+1===st.m?"cur":""}" style="background:${mauThang(d,i+1)}"></span>`).join("")}</div>
       ${note?`<p class="note">${esc(note)}</p>`:""}
       <div class="tags">${tags.join("")}</div></button>`}).join("");
+  taiAnhThe();
+}
+/* Ảnh thẻ: tải dần khi thẻ hiện ra trên màn hình */
+let quanSat=null;
+function taiAnhThe(){
+  const the=[...document.querySelectorAll(".thumb:not(.has)")];
+  if(!the.length) return;
+  const nap=el=>{const d=D.find(x=>x.id===el.dataset.anh);wikiTrang(d).then(k=>{if(k.anh){el.style.backgroundImage=`url('${k.anh}')`;el.classList.add("has")}}).catch(()=>{})};
+  if(!("IntersectionObserver" in window)){the.forEach(nap);return}
+  if(quanSat) quanSat.disconnect();
+  quanSat=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){quanSat.unobserve(e.target);nap(e.target)}}),{rootMargin:"200px"});
+  the.forEach(el=>quanSat.observe(el));
 }
 $("grid").addEventListener("click",e=>{const b=e.target.closest(".card");if(b)moChiTiet(b.dataset.id)});
 
@@ -590,7 +728,20 @@ function moChiTiet(id){
     <button class="close" id="closeSheet">Đóng</button>
     <div class="loc">${esc(vitri(d))} · ${VUNG[TMAP[d.tinh].vung]}</div>
     <h2 id="sheetTitle">${esc(d.ten)}</h2>
-    <p>${esc(d.mo)}</p>
+    <div class="cover" id="sCover"><span class="cap" id="sCap">Đang tải ảnh…</span></div>
+    <div class="gallery" id="sGallery"></div>
+    <h4>Giới thiệu</h4>
+    <div class="intro">${(GT[d.id]||[d.mo]).map(p=>`<p>${esc(p)}</p>`).join("")}</div>
+    <div class="wiki" id="sWiki" hidden></div>
+    <section class="myplan">
+      <div class="myplan-h"><b>Lịch trình cho bạn</b><span>tự lập theo lựa chọn bên dưới</span></div>
+      <div class="form form3">
+        <label>Xuất phát từ<select id="sFrom">${optTinh(st.from)}</select></label>
+        <label>Số ngày<select id="sDays">${[1,2,3,4,5,6,7].map(n=>`<option ${n===ngayGoiY(d,TMAP[st.from])?"selected":""}>${n}</option>`).join("")}</select></label>
+        <label>Đi cùng<select id="sWho">${optAi(st.who)}</select></label>
+      </div>
+      <div class="plan" id="sheetPlan"></div>
+    </section>
     <h4>Điểm "Đáng đi" tháng ${st.m}: <span class="num" style="color:${mau(c.s)};font-size:16px">${c.s}/100</span></h4>
     <ul class="why">${c.ly.map(([t,v],i)=>`<li><span>${esc(t)}</span><b class="num" style="color:${v<0?"var(--warn)":"var(--ink)"}">${i>0&&v>0?"+":""}${v}</b></li>`).join("")}</ul>
     <h4>Lịch mùa trong năm</h4>
@@ -608,13 +759,31 @@ function moChiTiet(id){
     <h4>Nhà hàng, khách sạn, quán ăn</h4>
     <div class="links">
       <a href="${ggl("nhà hàng "+d.ten+" "+tn)}" target="_blank" rel="noopener">Nhà hàng quanh ${esc(d.ten)} <span>Google Maps ↗</span></a>
-      <a href="${ggl(d.mon[0]+" "+d.ten+" "+tn)}" target="_blank" rel="noopener">Quán ${esc(d.mon[0].toLowerCase())} ngon <span>Google Maps ↗</span></a>
+      <a href="${ggl(d.mon[0]+" "+d.ten+" "+tn)}" target="_blank" rel="noopener">Quán ${esc(thuong(d.mon[0]))} ngon <span>Google Maps ↗</span></a>
       <a href="${ggl("khách sạn "+d.ten+" "+tn)}" target="_blank" rel="noopener">Khách sạn, nhà nghỉ quanh đây <span>Google Maps ↗</span></a>
       <a href="https://www.booking.com/searchresults.vi.html?ss=${tim(d.ten+", "+tn+", Việt Nam")}" target="_blank" rel="noopener">So giá phòng <span>Booking ↗</span></a>
     </div>
     <p class="hint">Mẹo: khi xem kết quả, đưa điểm sao và số lượt đánh giá vào "Máy chấm điểm uy tín" ở cuối trang để so cho công bằng. Hỏi giá trước khi gọi món ở khu đông khách.</p>`;
-  $("sheetBg").hidden=false; $("closeSheet").focus();
+  const veLichSheet=()=>{const from=TMAP[$("sFrom").value];st.from=from.id;st.who=$("sWho").value;luuLich();
+    $("sheetPlan").innerHTML=htmlLich(lapLichCho(d,from,+$("sDays").value,st.who),0)};
+  $("sFrom").onchange=()=>{$("sDays").value=ngayGoiY(d,TMAP[$("sFrom").value]);veLichSheet()};
+  $("sDays").onchange=veLichSheet; $("sWho").onchange=veLichSheet; veLichSheet();
+  napAnhSheet(d);
+  $("sheetBg").hidden=false; $("sheet").scrollTop=0; $("closeSheet").focus();
   $("closeSheet").onclick=dongChiTiet;
+}
+async function napAnhSheet(d){
+  const id=d.id;
+  try{
+    const k=await wikiTrang(d); if(!$("sCover")||$("sheetTitle").textContent!==d.ten) return;
+    if(k.anh){$("sCover").style.backgroundImage=`url('${k.anh}')`;$("sCap").innerHTML=`Ảnh: <a href="${k.url}" target="_blank" rel="noopener">Wikipedia</a>`}
+    else $("sCap").textContent="Chưa có ảnh cho điểm này";
+    if(k.trich){$("sWiki").hidden=false;$("sWiki").innerHTML=`<b>Theo Wikipedia tiếng Việt</b><p style="margin:6px 0 0">${esc(k.trich)}</p><div class="src">Nguồn: <a href="${k.url}" target="_blank" rel="noopener">bài “${esc(k.tieuDe)}” trên Wikipedia</a>, giấy phép CC BY-SA (cho phép dùng lại, ghi rõ nguồn).</div>`}
+    const bo=await wikiAnhBo(k.tieuDe); if($("sheetTitle").textContent!==d.ten) return;
+    $("sGallery").innerHTML=bo.map(a=>`<a href="${a.trang}" target="_blank" rel="noopener" title="${esc(a.ten)} – xem ảnh gốc và tác giả trên Wikimedia Commons" style="background-image:url('${a.nho}')"></a>`).join("");
+  }catch(e){
+    if($("sCap")) $("sCap").textContent="Ảnh hiện khi mở trên trang web chính thức";
+  }
 }
 function dongChiTiet(){$("sheetBg").hidden=true}
 $("sheetBg").addEventListener("click",e=>{if(e.target.id==="sheetBg")dongChiTiet()});
@@ -624,61 +793,93 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")dongChiTiet()});
 function kc(a,b){const R=6371,r=x=>x*Math.PI/180;const dLa=r(b.lat-a.lat),dLo=r(b.lon-a.lon);
   const h=Math.sin(dLa/2)**2+Math.cos(r(a.lat))*Math.cos(r(b.lat))*Math.sin(dLo/2)**2;return 2*R*Math.asin(Math.sqrt(h))*1.3}
 function diLai(km){ // khứ hồi, mỗi người, nghìn đồng
-  if(km<250) return {cach:"ô tô hoặc xe khách",gio:Math.round(km/50*10)/10,tien:Math.round(km*2*1.2/10)*10+100};
+  if(km<250) return {cach:"ô tô hoặc xe khách",gio:Math.max(1,Math.round(km/50*10)/10),tien:Math.round(km*2*1.2/10)*10+100};
   if(km<650) return {cach:"xe giường nằm hoặc tàu hỏa",gio:Math.round(km/45),tien:Math.round(km*2*1.0/10)*10+150};
   return {cach:"máy bay",gio:2,tien:2600};
 }
-$("pFrom").innerHTML = TINH.map(t=>`<option value="${t.id}" ${t.id==="quangninh"?"selected":""}>${esc(t.ten)}</option>`).join("");
-function lapLich(){
-  const from=TMAP[$("pFrom").value], days=+$("pDays").value, bud=(+$("pBudget").value||0)*1000, kieu=$("pKieu").value, who=$("pWho").value, m=st.m;
-  const ung = D.map(d=>{
-    const k=kc(from,d), dl=diLai(k), c=cham(d,m).s;
-    let diem=c;
-    if(kieu && !d.kieu.includes(kieu)) diem-=40;
-    if(dl.cach==="máy bay" && days<=2) diem-=30;
-    if(dl.cach!=="ô tô hoặc xe khách" && days<=2) diem-=15;
-    if(who!=="ban" && d.kieu.includes("nui") && ["tuyenquang","laichau","sonla","caobang"].includes(d.tinh)) diem-=15;
-    const tong = dl.tien + d.chi*Math.max(1,days-(dl.gio>6?1:0));
-    if(tong>bud) diem-=Math.min(40,(tong-bud)/bud*60);
-    return {d,dl,k,c,diem,tong};
+const LUU_Y={tre:"Đi cùng trẻ nhỏ: chọn khách sạn có phòng gia đình, mang áo ấm và thuốc cơ bản, không xếp lịch dậy quá sớm.",
+  gia:"Đi cùng người lớn tuổi: ưu tiên chỗ có cáp treo, xe điện; nghỉ trưa ở khách sạn; tránh leo dốc dài.",ban:""};
+function ngayGoiY(d,from){const dl=diLai(kc(from,d));return Math.min(7,Math.max(1,d.ngay+(dl.gio>6&&dl.cach!=="máy bay"?1:0)+(dl.cach==="máy bay"?1:0)))}
+
+function lapLichCho(d,from,days,who){
+  const m=st.m, k=kc(from,d), dl=diLai(k), c=cham(d,m).s;
+  const xeDem = dl.gio>6 && dl.cach!=="máy bay";
+  // Ghép thêm điểm gần (dưới khoảng 150 km) đang hợp mùa nếu còn dư ngày
+  const kem=[]; let du=days-d.ngay-(xeDem?1:0);
+  const gan=D.filter(x=>x!==d && kc(d,x)/1.3<150 && cham(x,m).s>=60).sort((a,b)=>cham(b,m).s-cham(a,m).s);
+  for(const x of gan){if(du<1)break;kem.push(x);du-=Math.min(x.ngay,du)}
+  const chuoi=[d,...kem];
+  const viec=chuoi.flatMap(x=>x.goi.map(g=>({g,x})));
+  const mon=chuoi.flatMap(x=>x.mon.map(mn=>({mn,x})));
+  const fmt=o=>o.g+(o.x!==d?` (${o.x.ten})`:"");
+  const lich=[]; let vi=0, mi=0;
+  for(let n=1;n<=days;n++){
+    const sl=[], dau=n===1, cuoi=n===days;
+    if(dau){
+      if(dl.cach==="máy bay") sl.push(["Sáng",`Bay từ ${from.ten}, nhận phòng ở ${ten(d.tinh)}`]);
+      else if(xeDem) sl.push(["Sáng",`Đi ${dl.cach} chuyến đêm từ ${from.ten} (khoảng ${dl.gio} giờ), tới nơi nhận phòng nghỉ ngơi`]);
+      else sl.push(["Sáng",`Xuất phát từ ${from.ten} bằng ${dl.cach}, khoảng ${dl.gio} giờ đường`]);
+      if(viec[vi]) sl.push(["Chiều",fmt(viec[vi++])]);
+    }else{
+      if(viec[vi]) sl.push(["Sáng",fmt(viec[vi++])]);
+      if(!cuoi && viec[vi]) sl.push(["Chiều",fmt(viec[vi++])]);
+    }
+    if(cuoi){
+      if(days===1) sl.push(["Tối",`Về ${from.ten}`]);
+      else sl.push(["Chiều",`Mua đặc sản, trả phòng, về ${from.ten}`]);
+    }else{
+      if(sl.length<2) sl.push(["Chiều","Thong thả dạo chơi, nghỉ ngơi"]);
+      const mm=mon[(mi++)%mon.length]; sl.push(["Tối",`Ăn ${thuong(mm.mn)}`+(mm.x!==d?` (${mm.x.ten})`:"")]);
+    }
+    lich.push(sl);
+  }
+  const anO=chuoi.length>1?Math.round((d.chi*(days-kem.length)+kem.reduce((s,x)=>s+x.chi,0))):d.chi*days;
+  return {d,chuoi,dl,c,lich,anO,tong:dl.tien+anO,who};
+}
+function htmlLich(p,bud){
+  const vuot=bud&&p.tong>bud;
+  const lyDo=[];const d=p.d,m=st.m;
+  if(d.dep.includes(m))lyDo.push("đang mùa đẹp nhất");else if(d.tranh.includes(m))lyDo.push("lưu ý: tháng này là mùa nên tránh");
+  if(d.le&&d.le.t.includes(m))lyDo.push(thuong(d.le.x));
+  if(d.nhan&&d.nhan.t.includes(m))lyDo.push(thuong(d.nhan.x));
+  return `<h4 class="plan-name">${esc(p.chuoi.map(x=>x.ten).join(" + "))}</h4>
+    <div class="sum"><span>Tháng ${m}: <b class="num">${p.c}/100</b></span><span>Đi lại: <b>${p.dl.cach}</b></span>
+      <span>Ước tính mỗi người: <b class="num" style="color:${vuot?"var(--warn)":"var(--jade)"}">${tien(p.tong)}</b> (đi lại ${tien(p.dl.tien)}, ăn ở ${tien(p.anO)})</span></div>
+    ${lyDo.length?`<p class="hint" style="margin-top:0">${esc(lyDo.join("; ").replace(/^./,c=>c.toUpperCase()))}.</p>`:""}
+    ${vuot?`<p class="hint" style="color:var(--warn)">Vượt ngân sách ${tien(bud)}. Tăng ngân sách hoặc giảm số ngày.</p>`:""}
+    ${p.lich.map((sl,i)=>`<div class="day"><div class="dl">Ngày ${i+1}</div><div class="slots">${sl.map(([b,t])=>`<p><span class="buoi">${b}</span>${esc(t)}</p>`).join("")}</div></div>`).join("")}
+    ${LUU_Y[p.who]?`<p class="hint">${LUU_Y[p.who]}</p>`:""}`;
+}
+function chonTuDong(from,days,kieu,who,bud){
+  return D.map(d=>{
+    const dl=diLai(kc(from,d)); let diem=cham(d,st.m).s;
+    if(kieu&&!d.kieu.includes(kieu))diem-=40;
+    if(dl.cach==="máy bay"&&days<=2)diem-=30;
+    if(dl.cach!=="ô tô hoặc xe khách"&&days<=2)diem-=15;
+    if(who!=="ban"&&d.kieu.includes("nui")&&["tuyenquang","laichau","sonla","caobang"].includes(d.tinh))diem-=15;
+    const tong=dl.tien+d.chi*days; if(bud&&tong>bud)diem-=Math.min(40,(tong-bud)/bud*60);
+    return {d,diem};
   }).sort((a,b)=>b.diem-a.diem);
-  const chinh=ung[0];
-  // ghép thêm điểm gần nhau (dưới 150 km) nếu đủ ngày
-  const kem=[]; let conNgay=days-chinh.d.ngay-(chinh.dl.gio>6?1:0);
-  for(const x of ung.slice(1)){
-    if(conNgay<1) break;
-    if(kc(chinh.d,x.d)/1.3<150 && x.c>=60 && (!kieu||x.d.kieu.includes(kieu))){kem.push(x);conNgay-=Math.min(x.d.ngay,conNgay)}
-  }
-  const chuoi=[chinh,...kem];
-  // phân ngày
-  const lich=[]; let n=1; const goi=chuoi.flatMap(x=>x.d.goi.map(g=>({g,d:x.d})));
-  const ngayDi = chinh.dl.gio>6;
-  if(ngayDi){lich.push([n++,`Đi ${chinh.dl.cach} từ ${from.ten} tới ${ten(chinh.d.tinh)} (khoảng ${chinh.dl.gio} giờ). Nhận phòng, ăn tối ${chinh.d.mon[0].toLowerCase()}.`])}
-  let gi=0;
-  while(n<=days){
-    const cuoi=n===days;
-    const hom=goi.slice(gi,gi+2); gi+=2;
-    let txt = hom.length?hom.map(x=>x.g+(chuoi.length>1?` (${x.d.ten})`:"")).join(". ")+".":"Thong thả dạo chơi, mua đặc sản.";
-    if(n===1&&!ngayDi) txt=`Sáng xuất phát từ ${from.ten} bằng ${chinh.dl.cach} (khoảng ${chinh.dl.gio} giờ). `+txt;
-    if(cuoi) txt+=` Chiều mua đặc sản rồi về ${from.ten}.`;
-    lich.push([n++,txt]);
-  }
-  const anO = chinh.d.chi*days;
-  const tong = chinh.dl.tien + anO;
-  const vuot = tong>bud;
-  const lyDo=[]; if(chinh.d.dep.includes(m))lyDo.push("đang mùa đẹp nhất"); if(chinh.d.le&&chinh.d.le.t.includes(m))lyDo.push(chinh.d.le.x.toLowerCase());
-  if(chinh.d.nhan&&chinh.d.nhan.t.includes(m))lyDo.push(chinh.d.nhan.x.toLowerCase());
-  $("plan").innerHTML=`
-    <h4>${esc(chuoi.map(x=>x.d.ten).join(" + "))}</h4>
-    <div class="sum"><span>Tháng ${m}: <b class="num">${chinh.c}/100</b></span><span>Đi lại: <b>${chinh.dl.cach}</b></span>
-      <span>Ước tính mỗi người: <b class="num" style="color:${vuot?"var(--warn)":"var(--jade)"}">${tien(tong)}</b> (đi lại ${tien(chinh.dl.tien)}, ăn ở ${tien(anO)})</span></div>
-    ${lyDo.length?`<p class="hint" style="margin-top:0">Vì sao chọn: ${esc(lyDo.join("; "))}.</p>`:""}
-    ${vuot?`<p class="hint" style="color:var(--warn)">Ngân sách ${tien(bud)} hơi thiếu cho chuyến này. Tăng ngân sách hoặc giảm số ngày để trang tìm nơi gần hơn.</p>`:""}
-    ${lich.map(([i,t])=>`<div class="day"><div class="dl">Ngày ${i}</div><p>${esc(t)}</p></div>`).join("")}
-    <p class="hint">Phương án khác cùng tháng: ${ung.slice(1,4).filter(x=>!kem.includes(x)).map(x=>`<a href="#" data-id="${x.d.id}" style="color:var(--jade)">${esc(x.d.ten)}</a>`).join(", ")}</p>`;
+}
+// Chọn sẵn của người dùng (nhớ trong trình duyệt)
+try{const r=JSON.parse(localStorage.getItem("ddmn_lich")||"{}");st.from=r.from||"quangninh";st.who=r.who||"ban"}catch(e){st.from="quangninh";st.who="ban"}
+function luuLich(){try{localStorage.setItem("ddmn_lich",JSON.stringify({from:st.from,who:st.who}))}catch(e){}}
+const optTinh=sel=>TINH.map(t=>`<option value="${t.id}" ${t.id===sel?"selected":""}>${esc(t.ten)}</option>`).join("");
+const optAi=sel=>[["ban","Bạn bè, cặp đôi"],["tre","Gia đình có trẻ nhỏ"],["gia","Có người lớn tuổi"]].map(([k,v])=>`<option value="${k}" ${k===sel?"selected":""}>${v}</option>`).join("");
+
+// Công cụ ở cuối trang
+$("pFrom").innerHTML=optTinh(st.from); $("pWho").innerHTML=optAi(st.who);
+$("pDest").innerHTML=`<option value="">Để trang tự chọn nơi đẹp nhất</option>`+D.map(d=>d).sort((a,b)=>a.ten.localeCompare(b.ten,"vi")).map(d=>`<option value="${d.id}">${esc(d.ten)} – ${esc(ten(d.tinh))}</option>`).join("");
+function lapLich(){
+  const from=TMAP[$("pFrom").value], days=+$("pDays").value, bud=(+$("pBudget").value||0)*1000, kieu=$("pKieu").value, who=$("pWho").value;
+  st.from=from.id; st.who=who; luuLich();
+  let d=D.find(x=>x.id===$("pDest").value), khac=[];
+  if(!d){const ds=chonTuDong(from,days,kieu,who,bud);d=ds[0].d;khac=ds.slice(1,4).map(x=>x.d)}
+  const p=lapLichCho(d,from,days,who);
+  $("plan").innerHTML=htmlLich(p,bud)+`<p class="hint"><a href="#" data-id="${d.id}" style="color:var(--jade);font-weight:600">Xem chi tiết ${esc(d.ten)}</a>${khac.length?` · Phương án khác: `+khac.map(x=>`<a href="#" data-id="${x.id}" style="color:var(--jade)">${esc(x.ten)}</a>`).join(", "):""}</p>`;
   $("plan").querySelectorAll("a[data-id]").forEach(a=>a.onclick=e=>{e.preventDefault();moChiTiet(a.dataset.id)});
 }
-$("pGo").addEventListener("click",lapLich);
+["pFrom","pDays","pBudget","pKieu","pWho","pDest"].forEach(id=>$(id).addEventListener("input",lapLich));
 
 /* ===== Máy chấm điểm uy tín ===== */
 const MAU = [["Quán A (ví dụ)",5.0,12],["Quán B (ví dụ)",4.6,2140],["Quán C (ví dụ)",4.8,310]];
