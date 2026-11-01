@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Đi Đâu Mùa Này – Gợi ý du lịch theo tháng trên 34 tỉnh thành</title>
+<meta name="description" content="Tháng này đi đâu? Chấm điểm Đáng đi cho từng điểm du lịch Việt Nam theo mùa, lễ hội và độ đông khách. Lập lịch trình theo túi tiền, chấm điểm uy tín nhà hàng, khách sạn.">
+<meta name="theme-color" content="#0B7A63">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Đi Đâu Mùa Này">
+<meta property="og:description" content="Gợi ý điểm du lịch đang đẹp nhất theo từng tháng trên 34 tỉnh thành mới.">
+<meta property="og:locale" content="vi_VN">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B7A63'/%3E%3Cpath d='M36 10c-6 4-9 9-6 15s-2 10-6 14 0 10 8 15' stroke='%23F7EBD2' stroke-width='6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>[hidden]{display:none!important} body{margin:0} img{max-width:100%}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:wght@500;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap">
+<style>
+/* Bố cục: thanh tháng cố định trên cùng → "Tháng này đi đâu" → dải chữ S 34 tỉnh thành bên trái, thẻ điểm đến bên phải → công cụ lịch trình và chấm điểm uy tín */
+:root{
+  --bg:#F2F5F3; --surface:#FFFFFF; --ink:#13231E; --muted:#56675F; --line:#D5DED9;
+  --jade:#0B7A63; --jade-soft:#DCEFE8; --marigold:#C98A1B; --marigold-soft:#F7EBD2;
+  --low:#B9C4BF; --warn:#B4462E; --warn-soft:#F6E1DB;
+  --f-display:"Alegreya",Georgia,"Times New Roman",serif;
+  --f-body:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1714; --surface:#16221E; --ink:#E6EEEA; --muted:#9AADA5; --line:#2A3A34;
+  --jade:#3FC2A0; --jade-soft:#173A31; --marigold:#E7B04B; --marigold-soft:#3A2F17;
+  --low:#3B4A44; --warn:#E98166; --warn-soft:#3C201A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1714; --surface:#16221E; --ink:#E6EEEA; --muted:#9AADA5; --line:#2A3A34;
+  --jade:#3FC2A0; --jade-soft:#173A31; --marigold:#E7B04B; --marigold-soft:#3A2F17;
+  --low:#3B4A44; --warn:#E98166; --warn-soft:#3C201A; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1180px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.15}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--jade);outline-offset:2px}
+.num{font-variant-numeric:tabular-nums}
+
+/* Thanh trên */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);
+  margin:0 calc(-1*max(16px,env(safe-area-inset-left,0px)));padding:10px max(16px,env(safe-area-inset-left,0px))}
+.top .wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font-family:var(--f-display);font-weight:800;font-size:22px;letter-spacing:-.01em;white-space:nowrap}
+.brand b{color:var(--jade)}
+.months{display:flex;gap:4px;overflow-x:auto;flex:1;min-width:0;scrollbar-width:none}
+.months::-webkit-scrollbar{display:none}
+.months button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 11px;font-size:13px;white-space:nowrap}
+.months button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.months button .now{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--marigold);margin-left:5px;vertical-align:middle}
+
+/* Hero */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:32px;padding-block:36px 28px;align-items:start}
+.hero .eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.hero h1{font-size:clamp(40px,6vw,68px);font-weight:800;letter-spacing:-.02em;margin-top:6px}
+.hero h1 em{font-style:italic;color:var(--jade)}
+.hero p.lead{color:var(--muted);max-width:44ch;margin:14px 0 0}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:18px;font-size:13px;color:var(--muted)}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:12px;height:12px;border-radius:3px;display:inline-block}
+.top5{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
+.top5 li{border-bottom:1px solid var(--line)}
+.top5 button{all:unset;cursor:pointer;display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px 4px;width:100%;box-sizing:border-box}
+.top5 button:hover .t-name{color:var(--jade)}
+.top5 button:focus-visible{outline:2px solid var(--jade)}
+.rank{font-family:var(--f-display);font-weight:800;font-size:22px;color:var(--muted)}
+.t-name{font-weight:600;font-size:16px}
+.t-sub{font-size:13px;color:var(--muted)}
+.score{font-family:var(--f-display);font-weight:800;font-size:26px;text-align:right;line-height:1}
+.score small{display:block;font-family:var(--f-body);font-weight:500;font-size:11px;color:var(--muted);letter-spacing:.04em}
+
+/* Khu chính */
+.section-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:36px 0 14px}
+.section-h h2{font-size:30px}
+.section-h p{margin:0;color:var(--muted);font-size:14px}
+.main{display:grid;grid-template-columns:270px minmax(0,1fr);gap:28px;align-items:start}
+.strip{position:sticky;top:calc(env(safe-area-inset-top,0px) + 66px);max-height:calc(100vh - 90px);overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:10px 0}
+.strip h3{font-size:16px;padding:2px 14px 8px;display:flex;justify-content:space-between;align-items:baseline}
+.strip h3 small{font-family:var(--f-body);font-weight:500;font-size:11px;color:var(--muted)}
+.reg-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:10px 14px 4px;font-weight:600}
+.prov{all:unset;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) 60px 26px;gap:8px;align-items:center;padding:4px 14px;width:100%;box-sizing:border-box;font-size:13.5px}
+.prov:hover{background:var(--jade-soft)}
+.prov[aria-pressed="true"]{background:var(--jade-soft);font-weight:600}
+.prov:focus-visible{outline:2px solid var(--jade);outline-offset:-2px}
+.prov .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prov .nm i{font-style:normal;color:var(--muted);font-size:11px;margin-left:4px}
+.bar{height:8px;border-radius:4px;background:var(--line);overflow:hidden}
+.bar>span{display:block;height:100%;border-radius:4px}
+.prov .v{text-align:right;font-size:12px;color:var(--muted)}
+
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.filters input[type=search]{flex:1 1 220px;min-width:0;padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:13px}
+.chip[aria-pressed="true"]{background:var(--jade);border-color:var(--jade);color:#fff}
+.active-filter{font-size:13px;color:var(--muted);margin:-4px 0 12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.active-filter button{border:none;background:var(--marigold-soft);color:var(--ink);border-radius:999px;padding:3px 10px;font-size:12.5px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.card{all:unset;cursor:pointer;box-sizing:border-box;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 14px 12px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.card:hover{border-color:var(--jade)}
+.card:focus-visible{outline:2px solid var(--jade);outline-offset:2px}
+.card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.card h3{font-size:19px}
+.card .loc{font-size:12.5px;color:var(--muted)}
+.badge{flex:none;font-family:var(--f-display);font-weight:800;font-size:20px;min-width:46px;text-align:center;border-radius:8px;padding:4px 6px;line-height:1.1}
+.cal{display:grid;grid-template-columns:repeat(12,1fr);gap:2px}
+.cal span{height:6px;border-radius:2px}
+.cal span.cur{outline:1.5px solid var(--ink);outline-offset:1px}
+.tags{display:flex;gap:5px;flex-wrap:wrap}
+.tag{font-size:11.5px;padding:2px 8px;border-radius:999px;background:var(--bg);color:var(--muted);border:1px solid var(--line)}
+.tag.good{background:var(--jade-soft);color:var(--jade);border-color:transparent}
+.tag.fest{background:var(--marigold-soft);color:var(--marigold);border-color:transparent}
+.tag.bad{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.card .note{font-size:13px;color:var(--ink);margin:0}
+.empty{padding:30px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:var(--r)}
+
+/* Chi tiết */
+.sheet-bg{position:fixed;inset:0;background:rgba(10,20,16,.45);z-index:20;display:flex;justify-content:flex-end}
+.sheet{background:var(--bg);width:min(560px,100%);height:100%;overflow:auto;padding:22px max(20px,env(safe-area-inset-right,0px)) calc(28px + env(safe-area-inset-bottom,0px)) 22px;padding-top:calc(22px + env(safe-area-inset-top,0px))}
+.sheet .close{float:right;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:5px 12px}
+.sheet h2{font-size:34px;margin-top:4px}
+.sheet .loc{color:var(--muted);font-size:14px}
+.sheet h4{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:22px 0 8px}
+.bigcal{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+.bigcal div{border-radius:6px;padding:6px 4px;text-align:center;font-size:12px;font-weight:600}
+.bigcal div.cur{outline:2px solid var(--ink);outline-offset:1px}
+.why{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}
+.why li{display:flex;justify-content:space-between;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:14px}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.facts div{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px}
+.facts b{display:block;font-family:var(--f-display);font-size:20px}
+.facts span{font-size:12px;color:var(--muted)}
+.sheet ul.plain{margin:0;padding-left:18px}
+.links{display:flex;flex-direction:column;gap:6px}
+.links a{display:flex;justify-content:space-between;align-items:center;gap:10px;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:14px}
+.links a:hover{border-color:var(--jade)}
+.links a span{color:var(--jade);font-weight:600;white-space:nowrap}
+.hint{font-size:12.5px;color:var(--muted);margin-top:8px}
+
+/* Công cụ */
+.tools{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:20px;align-items:start;margin-bottom:40px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.panel h3{font-size:24px}
+.panel > p{color:var(--muted);font-size:14px;margin:6px 0 16px}
+.form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.form label{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--muted);font-weight:500}
+.form select,.form input{padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);min-width:0}
+.btn{border:none;background:var(--jade);color:#fff;border-radius:8px;padding:10px 16px;font-weight:600}
+.plan{margin-top:18px;border-top:1px solid var(--line);padding-top:16px}
+.plan h4{font-family:var(--f-display);font-size:21px;margin:0}
+.plan .sum{display:flex;gap:16px;flex-wrap:wrap;font-size:13.5px;color:var(--muted);margin:6px 0 12px}
+.plan .sum b{color:var(--ink)}
+.day{display:grid;grid-template-columns:62px minmax(0,1fr);gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.day:last-child{border-bottom:none}
+.day .dl{font-family:var(--f-display);font-weight:800;font-size:15px;color:var(--jade)}
+.day p{margin:0;font-size:14px}
+.rate-row{display:grid;grid-template-columns:minmax(0,1.3fr) 70px 90px;gap:8px;margin-bottom:8px}
+.rate-row input{padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);min-width:0}
+.rate-head{display:grid;grid-template-columns:minmax(0,1.3fr) 70px 90px;gap:8px;font-size:12px;color:var(--muted);margin-bottom:4px}
+.rate-out{margin-top:12px;display:flex;flex-direction:column;gap:6px}
+.rate-out div{display:flex;justify-content:space-between;gap:10px;padding:8px 12px;border-radius:8px;background:var(--bg);font-size:14px}
+.rate-out div.win{background:var(--jade-soft)}
+.rate-out b{font-family:var(--f-display);font-size:18px}
+footer{border-top:1px solid var(--line);padding-block:20px 30px;color:var(--muted);font-size:13px}
+
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;gap:20px;padding-block:24px 16px}
+  .main{grid-template-columns:1fr}
+  .strip{position:static;max-height:none}
+  .strip-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .reg-label{grid-column:1/-1}
+  .tools{grid-template-columns:1fr}
+}
+@media (max-width:480px){
+  .strip-list{grid-template-columns:1fr}
+  .form{grid-template-columns:1fr}
+  .facts{grid-template-columns:1fr 1fr}
+}
+@media (prefers-reduced-motion:no-preference){.card,.prov,.links a{transition:border-color .15s,background .15s}}
+</style>
+
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand">Đi Đâu <b>Mùa Này</b></div>
+    <div class="months" id="months" role="group" aria-label="Chọn tháng đi"></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <div class="eyebrow" id="heroEyebrow">34 tỉnh thành · bản đồ hành chính mới</div>
+      <h1 id="heroTitle">Tháng 11 <em>đi đâu?</em></h1>
+      <p class="lead">Mỗi điểm đến được chấm thang 100 theo đúng tháng bạn chọn: mùa đẹp hay mùa nên tránh, có lễ hội không, có rơi vào cao điểm đông khách không. Chọn tháng khác ở thanh trên để xem bảng xếp hạng đổi theo.</p>
+      <div class="legend">
+        <span><i class="sw" style="background:var(--jade)"></i>Mùa đẹp nhất</span>
+        <span><i class="sw" style="background:var(--marigold)"></i>Đi được</span>
+        <span><i class="sw" style="background:var(--low)"></i>Nên tránh</span>
+      </div>
+    </div>
+    <ol class="top5" id="top5"></ol>
+  </section>
+
+  <div class="section-h">
+    <h2>Dải đất hình chữ S</h2>
+    <p>Bấm một tỉnh thành để xem các điểm đến ở đó. Gõ được cả tên tỉnh cũ, ví dụ "Hà Giang", "Quảng Nam".</p>
+  </div>
+  <div class="main">
+    <aside class="strip" aria-label="34 tỉnh thành từ Bắc vào Nam">
+      <h3>Bắc → Nam <small id="stripMonth">điểm cao nhất tháng 11</small></h3>
+      <div class="strip-list" id="strip"></div>
+    </aside>
+    <div style="min-width:0">
+      <div class="filters">
+        <input type="search" id="q" placeholder="Tìm điểm đến, tỉnh mới hoặc tỉnh cũ…" aria-label="Tìm kiếm">
+        <div id="vungChips" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+      </div>
+      <div class="filters" id="kieuChips"></div>
+      <div class="active-filter" id="activeFilter" hidden></div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </div>
+
+  <div class="section-h">
+    <h2>Công cụ</h2>
+    <p>Lập lịch trình theo túi tiền, và chấm lại điểm đánh giá để không bị lừa bởi điểm sao ảo.</p>
+  </div>
+  <div class="tools">
+    <section class="panel" aria-labelledby="planH">
+      <h3 id="planH">Lập lịch trình tự động</h3>
+      <p>Chọn nơi xuất phát, số ngày và ngân sách. Trang chọn điểm đến đang đẹp nhất trong tháng mà vẫn vừa túi tiền và vừa thời gian đi lại.</p>
+      <div class="form">
+        <label>Xuất phát từ<select id="pFrom"></select></label>
+        <label>Số ngày<select id="pDays"><option>2</option><option selected>3</option><option>4</option><option>5</option><option>7</option></select></label>
+        <label>Ngân sách mỗi người (triệu đồng)<input id="pBudget" type="number" min="1" step="0.5" value="5"></label>
+        <label>Kiểu chuyến đi<select id="pKieu">
+          <option value="">Gì cũng được</option><option value="bien">Biển đảo</option><option value="nui">Núi rừng</option>
+          <option value="van-hoa">Văn hóa, lễ hội</option><option value="sinh-thai">Sinh thái, sông nước</option><option value="tam-linh">Tâm linh</option>
+        </select></label>
+        <label style="grid-column:1/-1">Đi cùng<select id="pWho">
+          <option value="ban">Bạn bè, cặp đôi</option><option value="tre">Gia đình có trẻ nhỏ</option><option value="gia">Có người lớn tuổi</option>
+        </select></label>
+      </div>
+      <div style="margin-top:14px"><button class="btn" id="pGo">Lập lịch trình</button></div>
+      <div class="plan" id="plan"></div>
+    </section>
+
+    <section class="panel" aria-labelledby="rateH">
+      <h3 id="rateH">Máy chấm điểm uy tín</h3>
+      <p>Quán 5 sao với 12 lượt đánh giá chưa chắc hơn quán 4,6 sao với 2.000 lượt. Nhập điểm sao và số lượt đánh giá thấy trên Google Maps, trang sẽ quy về một điểm uy tín để so cho công bằng.</p>
+      <div class="rate-head"><span>Tên quán, khách sạn</span><span>Số sao</span><span>Số lượt</span></div>
+      <div id="rateRows"></div>
+      <div class="rate-out" id="rateOut"></div>
+      <p class="hint">Cách tính: lấy trung bình có trọng số giữa điểm của quán và mức 4,0 sao chung. Quán càng ít lượt đánh giá thì điểm càng bị kéo về 4,0, vì vài lượt khen rất dễ là đánh giá nhờ hoặc đánh giá mua.</p>
+    </section>
+  </div>
+</main>
+
+<footer><div class="wrap">Bản thử nghiệm đầu tiên. Mùa đẹp, chi phí và lễ hội là số liệu tham khảo, nên kiểm tra lại thời tiết và lịch lễ hội trước khi đi. Lễ hội theo âm lịch được quy về tháng dương lịch gần đúng.</div></footer>
+
+<div class="sheet-bg" id="sheetBg" hidden>
+  <article class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle"></article>
+</div>
+
+<script>
+/* ===== 34 tỉnh thành, xếp từ Bắc vào Nam ===== */
+const TINH = [
+ {id:"laichau",ten:"Lai Châu",cu:[],vung:"bac",lat:22.39,lon:103.46},
+ {id:"laocai",ten:"Lào Cai",cu:["Yên Bái"],vung:"bac",lat:22.48,lon:103.97},
+ {id:"tuyenquang",ten:"Tuyên Quang",cu:["Hà Giang"],vung:"bac",lat:22.0,lon:105.1},
+ {id:"caobang",ten:"Cao Bằng",cu:[],vung:"bac",lat:22.67,lon:106.26},
+ {id:"langson",ten:"Lạng Sơn",cu:[],vung:"bac",lat:21.85,lon:106.76},
+ {id:"thainguyen",ten:"Thái Nguyên",cu:["Bắc Kạn"],vung:"bac",lat:21.8,lon:105.85},
+ {id:"dienbien",ten:"Điện Biên",cu:[],vung:"bac",lat:21.39,lon:103.02},
+ {id:"sonla",ten:"Sơn La",cu:[],vung:"bac",lat:21.33,lon:103.91},
+ {id:"phutho",ten:"Phú Thọ",cu:["Vĩnh Phúc","Hòa Bình"],vung:"bac",lat:21.32,lon:105.40},
+ {id:"bacninh",ten:"Bắc Ninh",tp:1,cu:["Bắc Giang"],vung:"bac",lat:21.18,lon:106.07},
+ {id:"hanoi",ten:"Hà Nội",tp:1,cu:[],vung:"bac",lat:21.03,lon:105.85},
+ {id:"quangninh",ten:"Quảng Ninh",tp:1,cu:[],vung:"bac",lat:20.95,lon:107.08},
+ {id:"haiphong",ten:"Hải Phòng",tp:1,cu:["Hải Dương"],vung:"bac",lat:20.86,lon:106.68},
+ {id:"hungyen",ten:"Hưng Yên",cu:["Thái Bình"],vung:"bac",lat:20.65,lon:106.05},
+ {id:"ninhbinh",ten:"Ninh Bình",cu:["Hà Nam","Nam Định"],vung:"bac",lat:20.25,lon:105.97},
+ {id:"thanhhoa",ten:"Thanh Hóa",cu:[],vung:"trung",lat:19.81,lon:105.78},
+ {id:"nghean",ten:"Nghệ An",cu:[],vung:"trung",lat:18.68,lon:105.68},
+ {id:"hatinh",ten:"Hà Tĩnh",cu:[],vung:"trung",lat:18.34,lon:105.90},
+ {id:"quangtri",ten:"Quảng Trị",cu:["Quảng Bình"],vung:"trung",lat:17.2,lon:106.6},
+ {id:"hue",ten:"Huế",tp:1,cu:["Thừa Thiên Huế"],vung:"trung",lat:16.46,lon:107.59},
+ {id:"danang",ten:"Đà Nẵng",tp:1,cu:["Quảng Nam"],vung:"trung",lat:16.05,lon:108.20},
+ {id:"quangngai",ten:"Quảng Ngãi",cu:["Kon Tum"],vung:"trung",lat:15.12,lon:108.80},
+ {id:"gialai",ten:"Gia Lai",cu:["Bình Định"],vung:"trung",lat:13.9,lon:108.6},
+ {id:"daklak",ten:"Đắk Lắk",cu:["Phú Yên"],vung:"trung",lat:12.8,lon:108.6},
+ {id:"khanhhoa",ten:"Khánh Hòa",cu:["Ninh Thuận"],vung:"trung",lat:12.24,lon:109.19},
+ {id:"lamdong",ten:"Lâm Đồng",cu:["Đắk Nông","Bình Thuận"],vung:"trung",lat:11.94,lon:108.44},
+ {id:"dongnai",ten:"Đồng Nai",tp:1,cu:["Bình Phước"],vung:"nam",lat:11.2,lon:106.9},
+ {id:"tayninh",ten:"Tây Ninh",cu:["Long An"],vung:"nam",lat:11.0,lon:106.2},
+ {id:"hcm",ten:"TP. Hồ Chí Minh",tp:1,cu:["Bình Dương","Bà Rịa - Vũng Tàu"],vung:"nam",lat:10.78,lon:106.70},
+ {id:"dongthap",ten:"Đồng Tháp",cu:["Tiền Giang"],vung:"nam",lat:10.46,lon:105.85},
+ {id:"vinhlong",ten:"Vĩnh Long",cu:["Bến Tre","Trà Vinh"],vung:"nam",lat:10.15,lon:106.2},
+ {id:"angiang",ten:"An Giang",cu:["Kiên Giang"],vung:"nam",lat:10.38,lon:105.13},
+ {id:"cantho",ten:"Cần Thơ",tp:1,cu:["Sóc Trăng","Hậu Giang"],vung:"nam",lat:10.03,lon:105.78},
+ {id:"camau",ten:"Cà Mau",cu:["Bạc Liêu"],vung:"nam",lat:9.18,lon:105.15},
+];
+const VUNG = {bac:"Miền Bắc",trung:"Miền Trung và Tây Nguyên",nam:"Miền Nam"};
+const KIEU = {bien:"Biển đảo",nui:"Núi rừng",pho:"Phố thị","van-hoa":"Văn hóa, lễ hội","sinh-thai":"Sinh thái, sông nước","tam-linh":"Tâm linh"};
+
+/* ===== Điểm đến =====
+ dep: tháng đẹp nhất · tranh: tháng nên tránh · le: lễ hội · nhan: điểm nhấn theo mùa
+ chi: chi phí ăn ở tầm trung (nghìn đồng/người/ngày) · ngay: số ngày nên ở · cu: tên tỉnh cũ của nơi đó */
+const D = [
+ // --- Miền Bắc ---
+ {id:"halong",ten:"Vịnh Hạ Long",tinh:"quangninh",lat:20.91,lon:107.18,kieu:["bien"],dep:[3,4,5,9,10,11],tranh:[7,8],chi:1500,ngay:2,
+  mo:"Di sản thiên nhiên thế giới với gần 2.000 hòn đảo đá vôi. Nên ngủ đêm trên du thuyền để thấy vịnh lúc bình minh.",
+  nhan:{t:[10,11],x:"Tháng 10–11 trời trong, biển lặng, ít mưa bão"},mon:["Chả mực giã tay","Sá sùng","Ngán","Bánh cuốn chả mực"],
+  goi:["Du thuyền ngủ đêm trên vịnh","Chèo thuyền kayak ở hang Luồn","Leo đỉnh Ti Tốp ngắm vịnh","Ăn hải sản ở chợ đêm Hạ Long"]},
+ {id:"coto",ten:"Đảo Cô Tô",tinh:"quangninh",lat:20.98,lon:107.76,kieu:["bien"],dep:[4,5,6,9],tranh:[11,12,1,2,3],chi:1100,ngay:3,
+  mo:"Đảo xa bờ, nước biển trong, bãi Hồng Vàn và con đường ven biển rất đẹp. Phụ thuộc thời tiết vì tàu có thể dừng chạy khi biển động.",
+  nhan:{t:[5,6],x:"Tháng 5–6 biển xanh nhất, chưa vào bão"},mon:["Ghẹ","Mực một nắng","Sá sùng"],
+  goi:["Ngắm bình minh ở bãi Hồng Vàn","Đạp xe đường ven biển","Thăm ngọn hải đăng Cô Tô"]},
+ {id:"yentu",ten:"Yên Tử",tinh:"quangninh",lat:21.16,lon:106.72,kieu:["tam-linh","nui"],dep:[1,2,3],tranh:[7,8],chi:700,ngay:1,
+  mo:"Đất tổ Thiền phái Trúc Lâm. Đường lên chùa Đồng xuyên rừng trúc, có cáp treo.",
+  le:{t:[2,3],x:"Lễ hội Xuân Yên Tử (mùng 10 tháng Giêng đến hết tháng 3 âm lịch)"},mon:["Măng trúc Yên Tử","Gà đồi"],
+  goi:["Lên chùa Đồng bằng cáp treo","Thăm chùa Hoa Yên","Đi bộ đường rừng trúc"]},
+ {id:"hanoi-phoco",ten:"Phố cổ Hà Nội",tinh:"hanoi",lat:21.03,lon:105.85,kieu:["pho","van-hoa"],dep:[10,11,12,3,4],tranh:[],chi:1200,ngay:2,
+  mo:"36 phố phường, hồ Gươm, Văn Miếu, phố đi bộ cuối tuần. Ẩm thực đường phố đặc sắc bậc nhất cả nước.",
+  nhan:{t:[10,11],x:"Thu Hà Nội: hoa sữa, cốm làng Vòng, trời mát"},mon:["Phở bò","Bún chả","Chả cá Lã Vọng","Cốm làng Vòng"],
+  goi:["Dạo phố đi bộ hồ Gươm tối cuối tuần","Thăm Văn Miếu – Quốc Tử Giám","Ăn sáng phở, trưa bún chả","Cà phê trứng phố cổ"]},
+ {id:"hagiang",ten:"Cao nguyên đá Đồng Văn",tinh:"tuyenquang",cu:"Hà Giang",lat:23.27,lon:105.36,kieu:["nui"],dep:[10,11,3,4],tranh:[6,7,8],chi:900,ngay:4,
+  mo:"Cung đường đèo Mã Pí Lèng, sông Nho Quế, cột cờ Lũng Cú. Đi xe máy cùng người dẫn đường địa phương là trải nghiệm đáng nhất.",
+  nhan:{t:[10,11],x:"Tháng 10–11 hoa tam giác mạch nở khắp cao nguyên"},mon:["Thắng cố","Cháo ấu tẩu","Bánh cuốn trứng","Mèn mén"],
+  goi:["Vượt đèo Mã Pí Lèng","Đi thuyền sông Nho Quế","Lên cột cờ Lũng Cú","Phố cổ Đồng Văn buổi tối"]},
+ {id:"hoangsuphi",ten:"Ruộng bậc thang Hoàng Su Phì",tinh:"tuyenquang",cu:"Hà Giang",lat:22.75,lon:104.68,kieu:["nui"],dep:[9,10],tranh:[1,2],chi:800,ngay:2,
+  mo:"Ruộng bậc thang ít khách hơn Mù Cang Chải, đẹp và nguyên sơ.",nhan:{t:[9,10],x:"Cuối tháng 9 đến đầu tháng 10 lúa chín vàng"},mon:["Chè Shan tuyết","Thịt lợn đen"],
+  goi:["Ngắm ruộng bậc thang Bản Luốc","Ở nhà dân người Dao"]},
+ {id:"sapa",ten:"Sa Pa – Fansipan",tinh:"laocai",lat:22.34,lon:103.84,kieu:["nui"],dep:[3,4,5,9,10],tranh:[7],chi:1300,ngay:3,
+  mo:"Thị trấn sương mù, bản Cát Cát, Tả Van, đỉnh Fansipan 3.143 m. Mùa đông có thể có băng tuyết.",
+  nhan:{t:[9],x:"Tháng 9 lúa chín ở Mường Hoa"},mon:["Cá hồi","Thắng cố","Lợn cắp nách","Rau cải mèo"],
+  goi:["Cáp treo lên đỉnh Fansipan","Đi bộ bản Cát Cát, Tả Van","Chợ đêm Sa Pa","Đèo Ô Quy Hồ lúc hoàng hôn"]},
+ {id:"mucangchai",ten:"Mù Cang Chải",tinh:"laocai",cu:"Yên Bái",lat:21.85,lon:104.09,kieu:["nui"],dep:[9,10,5,6],tranh:[12,1,2],chi:800,ngay:2,
+  mo:"Ruộng bậc thang nổi tiếng nhất Việt Nam, đồi Mâm Xôi, đèo Khau Phạ.",
+  nhan:{t:[9],x:"Giữa tháng 9 lúa chín vàng; tháng 5–6 là mùa nước đổ"},mon:["Xôi ngũ sắc","Thịt trâu gác bếp"],
+  goi:["Ngắm đồi Mâm Xôi","Vượt đèo Khau Phạ","Ở nhà dân bản La Pán Tẩn"]},
+ {id:"babe",ten:"Hồ Ba Bể",tinh:"thainguyen",cu:"Bắc Kạn",lat:22.41,lon:105.62,kieu:["sinh-thai","nui"],dep:[4,5,9,10,11],tranh:[],chi:700,ngay:2,
+  mo:"Hồ nước ngọt tự nhiên lớn nhất Việt Nam giữa núi đá vôi, động Puông, ao Tiên.",mon:["Cá nướng hồ Ba Bể","Vịt bầu","Xôi trứng kiến"],
+  goi:["Đi thuyền quanh hồ và động Puông","Ở nhà sàn bản Pác Ngòi"]},
+ {id:"banGioc",ten:"Thác Bản Giốc",tinh:"caobang",lat:22.85,lon:106.72,kieu:["sinh-thai","nui"],dep:[8,9,10],tranh:[1,2],chi:800,ngay:3,
+  mo:"Thác nước tự nhiên lớn nhất Đông Nam Á nằm trên biên giới Việt – Trung, kết hợp động Ngườm Ngao.",
+  nhan:{t:[9,10],x:"Tháng 9–10 thác nhiều nước, lúa chín quanh thác"},mon:["Vịt quay bảy vị","Bánh cuốn canh","Hạt dẻ Trùng Khánh"],
+  goi:["Đi bè sát chân thác","Thăm động Ngườm Ngao","Hồ Thang Hen, đèo Mã Phục"]},
+ {id:"pacbo",ten:"Khu di tích Pác Bó",tinh:"caobang",lat:22.99,lon:106.05,kieu:["van-hoa"],dep:[9,10,11,3,4],tranh:[],chi:700,ngay:1,
+  mo:"Nơi Bác Hồ về nước năm 1941, suối Lê Nin, núi Các Mác.",mon:["Bánh cuốn canh"],goi:["Thăm hang Cốc Bó, suối Lê Nin"]},
+ {id:"mauson",ten:"Mẫu Sơn",tinh:"langson",lat:21.85,lon:107.0,kieu:["nui"],dep:[12,1,10,11],tranh:[],chi:800,ngay:2,
+  mo:"Đỉnh núi gần Hà Nội nhất có khả năng xuất hiện băng giá khi rét đậm.",nhan:{t:[12,1],x:"Rét đậm có thể có băng giá"},mon:["Vịt quay Lạng Sơn","Khâu nhục","Lợn quay"],
+  goi:["Săn mây, săn băng giá trên đỉnh","Chợ Kỳ Lừa, phố đêm Lạng Sơn"]},
+ {id:"mocchau",ten:"Cao nguyên Mộc Châu",tinh:"sonla",lat:20.85,lon:104.65,kieu:["nui"],dep:[11,12,1,2],tranh:[7,8],chi:900,ngay:2,
+  mo:"Đồi chè trái tim, rừng thông bản Áng, thác Dải Yếm. Mùa nào cũng có một loại hoa.",
+  nhan:{t:[11,12],x:"Tháng 11–12 hoa cải trắng, dã quỳ; tháng 1–2 hoa mận trắng"},mon:["Bê chao","Sữa tươi Mộc Châu","Cá suối nướng"],
+  goi:["Đồi chè trái tim lúc sáng sớm","Rừng thông bản Áng","Vườn mận Nà Ka","Thác Dải Yếm"]},
+ {id:"taxua",ten:"Tà Xùa",tinh:"sonla",lat:21.32,lon:104.48,kieu:["nui"],dep:[11,12,1,2,3],tranh:[6,7,8],chi:700,ngay:2,
+  mo:"Thiên đường săn mây với sống lưng khủng long. Đường lên dốc, cần xe tốt.",nhan:{t:[11,12,1],x:"Mùa săn mây đẹp nhất"},mon:["Chè Shan tuyết cổ thụ","Gà đồi"],
+  goi:["Săn mây lúc bình minh","Sống lưng khủng long"]},
+ {id:"dienbien",ten:"Điện Biên Phủ",tinh:"dienbien",lat:21.39,lon:103.02,kieu:["van-hoa"],dep:[3,5],tranh:[7,8],chi:800,ngay:2,
+  mo:"Đồi A1, hầm Đờ Cát, Bảo tàng Chiến thắng Điện Biên Phủ.",
+  le:{t:[3],x:"Lễ hội Hoa Ban (tháng 3)"},nhan:{t:[3],x:"Tháng 3 hoa ban trắng khắp thung lũng Mường Thanh"},mon:["Gạo nếp Điện Biên","Pa pỉnh tộp (cá nướng gập)"],
+  goi:["Đồi A1 và hầm Đờ Cát","Bảo tàng Chiến thắng","Cánh đồng Mường Thanh"]},
+ {id:"denhung",ten:"Đền Hùng",tinh:"phutho",lat:21.37,lon:105.32,kieu:["tam-linh","van-hoa"],dep:[4,3,10],tranh:[],chi:600,ngay:1,
+  mo:"Khu di tích thờ các Vua Hùng trên núi Nghĩa Lĩnh.",le:{t:[4],x:"Giỗ Tổ Hùng Vương (10/3 âm lịch)"},mon:["Bánh chưng, bánh giầy","Thịt chua Thanh Sơn"],
+  goi:["Viếng đền Hạ, đền Trung, đền Thượng","Nghe hát Xoan"]},
+ {id:"tamdao",ten:"Tam Đảo",tinh:"phutho",cu:"Vĩnh Phúc",lat:21.46,lon:105.64,kieu:["nui"],dep:[5,6,7,8],tranh:[],chi:900,ngay:2,
+  mo:"Thị trấn trên mây gần Hà Nội, mát mẻ giữa mùa hè.",nhan:{t:[6,7],x:"Trốn nóng mùa hè"},mon:["Su su xào","Gà đồi"],goi:["Nhà thờ đá Tam Đảo","Thác Bạc","Cổng trời"]},
+ {id:"maichau",ten:"Mai Châu",tinh:"phutho",cu:"Hòa Bình",lat:20.66,lon:105.08,kieu:["sinh-thai","van-hoa"],dep:[5,6,9,10],tranh:[],chi:800,ngay:2,
+  mo:"Thung lũng người Thái với bản Lác, bản Pom Coọng, đạp xe giữa đồng lúa.",nhan:{t:[5,9],x:"Lúa chín vàng thung lũng"},mon:["Cơm lam","Gà nướng","Cá suối"],
+  goi:["Đạp xe quanh bản Lác","Xem múa xòe Thái buổi tối"]},
+ {id:"lim",ten:"Quê hương Quan họ",tinh:"bacninh",lat:21.13,lon:106.03,kieu:["van-hoa","tam-linh"],dep:[2,3],tranh:[],chi:600,ngay:1,
+  mo:"Chùa Bút Tháp, chùa Dâu, làng tranh Đông Hồ, nghe quan họ trên thuyền.",le:{t:[2],x:"Hội Lim (13 tháng Giêng âm lịch)"},mon:["Bánh phu thê Đình Bảng","Bánh tẻ Chờ"],
+  goi:["Chùa Bút Tháp, chùa Dâu","Làng tranh Đông Hồ","Nghe quan họ"]},
+ {id:"catba",ten:"Cát Bà – vịnh Lan Hạ",tinh:"haiphong",lat:20.73,lon:107.05,kieu:["bien","sinh-thai"],dep:[4,5,6,9],tranh:[12,1],chi:1200,ngay:3,
+  mo:"Vịnh Lan Hạ ít tàu hơn Hạ Long, nước trong, nhiều bãi tắm nhỏ. Vườn quốc gia Cát Bà có voọc Cát Bà.",mon:["Bánh đa cua","Nem cua bể","Tu hài"],
+  goi:["Chèo thuyền kayak vịnh Lan Hạ","Trekking vườn quốc gia","Bãi Cát Cò"]},
+ {id:"conson",ten:"Côn Sơn – Kiếp Bạc",tinh:"haiphong",cu:"Hải Dương",lat:21.13,lon:106.39,kieu:["tam-linh","van-hoa"],dep:[2,3,9],tranh:[],chi:600,ngay:1,
+  mo:"Đền thờ Đức Thánh Trần, chùa Côn Sơn gắn với Nguyễn Trãi.",le:{t:[9],x:"Lễ hội mùa thu Côn Sơn – Kiếp Bạc (tháng 8 âm lịch)"},mon:["Bánh đậu xanh","Bánh gai Ninh Giang"],
+  goi:["Đền Kiếp Bạc","Chùa Côn Sơn, Bàn Cờ Tiên"]},
+ {id:"phohien",ten:"Phố Hiến",tinh:"hungyen",lat:20.65,lon:106.05,kieu:["van-hoa"],dep:[7,8,10,11],tranh:[],chi:600,ngay:1,
+  mo:"Thương cảng xưa với đền Mẫu, chùa Chuông, Văn Miếu Xích Đằng.",nhan:{t:[7,8],x:"Mùa nhãn lồng Hưng Yên"},mon:["Nhãn lồng","Chè sen long nhãn"],goi:["Chùa Chuông, đền Mẫu","Hồ Bán Nguyệt"]},
+ {id:"trangan",ten:"Tràng An – Tam Cốc",tinh:"ninhbinh",lat:20.25,lon:105.9,kieu:["sinh-thai","van-hoa"],dep:[5,6,1,2,3],tranh:[],chi:900,ngay:2,
+  mo:"Di sản kép thế giới: đi thuyền qua hang núi đá vôi, Hang Múa, cố đô Hoa Lư, chùa Bái Đính.",
+  le:{t:[2,3],x:"Lễ hội Tràng An, Bái Đính đầu xuân"},nhan:{t:[5,6],x:"Cuối tháng 5 đầu tháng 6 lúa chín Tam Cốc"},mon:["Dê núi","Cơm cháy","Phở bò Nam Định","Nem chua Phủ Lý"],
+  goi:["Đi thuyền Tràng An","Leo Hang Múa ngắm toàn cảnh","Cố đô Hoa Lư","Chùa Bái Đính"]},
+ {id:"tamchuc",ten:"Chùa Tam Chúc",tinh:"ninhbinh",cu:"Hà Nam",lat:20.53,lon:105.82,kieu:["tam-linh"],dep:[1,2,3],tranh:[],chi:600,ngay:1,
+  mo:"Quần thể chùa lớn bên hồ Tam Chúc, nơi từng tổ chức Đại lễ Phật đản Liên Hợp Quốc 2019.",mon:["Cá kho Nhân Hậu","Bánh cuốn Phủ Lý"],goi:["Đi thuyền hồ Tam Chúc","Điện Tam Thế, điện Pháp Chủ"]},
+ // --- Miền Trung và Tây Nguyên ---
+ {id:"puluong",ten:"Pù Luông",tinh:"thanhhoa",lat:20.45,lon:105.2,kieu:["nui","sinh-thai"],dep:[5,6,9,10],tranh:[],chi:900,ngay:2,
+  mo:"Khu bảo tồn với ruộng bậc thang, guồng nước và homestay giữa rừng, yên tĩnh hơn Sa Pa.",nhan:{t:[5,6,9],x:"Lúa chín vàng thung lũng"},mon:["Cơm lam","Vịt bầu"],goi:["Trekking bản Đôn – bản Hiêu","Thác Hiêu"]},
+ {id:"samson",ten:"Biển Sầm Sơn",tinh:"thanhhoa",lat:19.74,lon:105.9,kieu:["bien"],dep:[5,6,7,8],tranh:[11,12,1,2],chi:900,ngay:2,
+  mo:"Bãi biển gần Hà Nội, nhiều dịch vụ, hợp gia đình đi hè.",mon:["Nem chua Thanh Hóa","Bánh răng bừa","Hải sản"],goi:["Tắm biển","Đền Độc Cước"]},
+ {id:"kimlien",ten:"Làng Sen – Kim Liên",tinh:"nghean",lat:18.73,lon:105.53,kieu:["van-hoa"],dep:[5],tranh:[],chi:600,ngay:1,
+  mo:"Quê nội và quê ngoại của Chủ tịch Hồ Chí Minh.",le:{t:[5],x:"Lễ hội Làng Sen (quanh ngày 19/5)"},mon:["Cháo lươn Vinh","Bánh mướt"],goi:["Nhà Bác ở làng Sen, làng Hoàng Trù"]},
+ {id:"cualo",ten:"Biển Cửa Lò",tinh:"nghean",lat:18.82,lon:105.72,kieu:["bien"],dep:[5,6,7,8],tranh:[10,11,12,1],chi:900,ngay:2,mo:"Bãi biển dài, cát mịn, nhiều hải sản.",mon:["Cháo lươn","Mực nhảy"],goi:["Đảo Lan Châu","Đảo Song Ngư"]},
+ {id:"thiencam",ten:"Biển Thiên Cầm",tinh:"hatinh",lat:18.25,lon:106.12,kieu:["bien"],dep:[5,6,7,8],tranh:[10,11,12,1],chi:800,ngay:2,mo:"Bãi biển yên tĩnh, ít đông hơn Cửa Lò.",mon:["Ram bánh mướt","Kẹo cu đơ"],goi:["Ngã ba Đồng Lộc","Tắm biển Thiên Cầm"]},
+ {id:"phongnha",ten:"Phong Nha – Kẻ Bàng",tinh:"quangtri",cu:"Quảng Bình",lat:17.59,lon:106.28,kieu:["sinh-thai","nui"],dep:[3,4,5,6,7,8],tranh:[10,11],chi:1100,ngay:3,
+  mo:"Vương quốc hang động: động Phong Nha, Thiên Đường, hang Tối. Mùa mưa lũ nhiều tour hang phải dừng.",mon:["Cháo canh Quảng Bình","Bánh bột lọc","Khoai deo"],
+  goi:["Đi thuyền động Phong Nha","Động Thiên Đường","Zipline hang Tối"]},
+ {id:"vinhmoc",ten:"Thành cổ và địa đạo Vịnh Mốc",tinh:"quangtri",lat:16.9,lon:107.0,kieu:["van-hoa"],dep:[2,3,4,7],tranh:[10,11],chi:700,ngay:1,
+  mo:"Thành cổ Quảng Trị, cầu Hiền Lương – sông Bến Hải, địa đạo Vịnh Mốc.",mon:["Bánh ướt Quảng Trị","Cháo bột cá lóc"],goi:["Thành cổ Quảng Trị","Cầu Hiền Lương","Địa đạo Vịnh Mốc"]},
+ {id:"hue",ten:"Cố đô Huế",tinh:"hue",lat:16.46,lon:107.59,kieu:["van-hoa","pho"],dep:[1,2,3,4],tranh:[10,11],chi:1000,ngay:2,
+  mo:"Đại Nội, lăng Tự Đức, lăng Khải Định, chùa Thiên Mụ, nghe ca Huế trên sông Hương.",mon:["Bún bò Huế","Cơm hến","Bánh bèo, nậm, lọc","Chè Huế"],
+  goi:["Đại Nội buổi sáng","Lăng Tự Đức, Khải Định","Chùa Thiên Mụ","Ca Huế trên sông Hương"]},
+ {id:"danang",ten:"Biển Đà Nẵng – Bà Nà",tinh:"danang",lat:16.05,lon:108.24,kieu:["bien","pho"],dep:[3,4,5,6,7,8],tranh:[10,11],chi:1400,ngay:3,
+  mo:"Biển Mỹ Khê, bán đảo Sơn Trà, Ngũ Hành Sơn, Bà Nà, cầu Rồng phun lửa tối cuối tuần.",nhan:{t:[6,7],x:"Mùa lễ hội pháo hoa quốc tế"},mon:["Mì Quảng","Bánh tráng cuốn thịt heo","Bún chả cá"],
+  goi:["Tắm biển Mỹ Khê","Bán đảo Sơn Trà","Bà Nà","Cầu Rồng phun lửa tối thứ 7, chủ nhật"]},
+ {id:"hoian",ten:"Phố cổ Hội An",tinh:"danang",cu:"Quảng Nam",lat:15.88,lon:108.33,kieu:["pho","van-hoa"],dep:[2,3,4,5],tranh:[10,11],chi:1100,ngay:2,
+  mo:"Phố cổ đèn lồng, chùa Cầu, thả hoa đăng sông Hoài, làng rau Trà Quế.",nhan:{t:[2,3,4],x:"Trời mát, khô ráo, ít khách hơn mùa hè"},mon:["Cao lầu","Cơm gà Hội An","Bánh mì Phượng"],
+  goi:["Phố cổ về đêm, thả hoa đăng","Chùa Cầu","Đạp xe làng rau Trà Quế","Biển An Bàng"]},
+ {id:"culaocham",ten:"Cù Lao Chàm",tinh:"danang",cu:"Quảng Nam",lat:15.95,lon:108.51,kieu:["bien"],dep:[4,5,6,7,8],tranh:[10,11,12,1],chi:1000,ngay:1,mo:"Khu dự trữ sinh quyển thế giới, lặn ngắm san hô.",mon:["Ốc vú nàng","Cua đá"],goi:["Lặn ngắm san hô","Bãi Ông, bãi Chồng"]},
+ {id:"myson",ten:"Thánh địa Mỹ Sơn",tinh:"danang",cu:"Quảng Nam",lat:15.77,lon:108.12,kieu:["van-hoa"],dep:[2,3,4,5],tranh:[10,11],chi:700,ngay:1,mo:"Quần thể đền tháp Chăm Pa, di sản văn hóa thế giới.",mon:["Mì Quảng"],goi:["Tham quan sớm để tránh nắng","Xem múa Chăm"]},
+ {id:"lyson",ten:"Đảo Lý Sơn",tinh:"quangngai",lat:15.38,lon:109.12,kieu:["bien"],dep:[3,4,5,6,7,8],tranh:[10,11,12],chi:900,ngay:2,
+  mo:"Đảo núi lửa với Cổng Tò Vò, đỉnh Thới Lới, đảo Bé nước trong vắt.",mon:["Tỏi Lý Sơn","Gỏi rong biển","Ốc cừ"],goi:["Cổng Tò Vò lúc hoàng hôn","Đảo Bé","Đỉnh Thới Lới"]},
+ {id:"mangden",ten:"Măng Đen",tinh:"quangngai",cu:"Kon Tum",lat:14.6,lon:108.27,kieu:["nui","sinh-thai"],dep:[11,12,1,2,3],tranh:[7,8,9],chi:800,ngay:2,
+  mo:"Rừng thông, hồ, thác giữa cao nguyên mát lạnh, còn hoang sơ.",nhan:{t:[2,3],x:"Mai anh đào nở"},mon:["Gỏi lá","Gà nướng cơm lam"],goi:["Hồ Đăk Ke","Thác Pa Sỹ","Tượng Đức Mẹ Măng Đen"]},
+ {id:"quynhon",ten:"Quy Nhơn – Kỳ Co",tinh:"gialai",cu:"Bình Định",lat:13.77,lon:109.23,kieu:["bien"],dep:[2,3,4,5,6,7,8],tranh:[10,11,12],chi:1100,ngay:3,
+  mo:"Kỳ Co, Eo Gió, Hòn Khô, tháp Đôi. Biển đẹp, giá còn mềm hơn Nha Trang.",mon:["Bánh xèo tôm nhảy","Bún chả cá","Bánh hỏi cháo lòng"],
+  goi:["Cano ra Kỳ Co","Eo Gió lúc hoàng hôn","Lặn ngắm san hô Hòn Khô","Tháp Đôi, tháp Bánh Ít"]},
+ {id:"pleiku",ten:"Pleiku – núi lửa Chư Đăng Ya",tinh:"gialai",lat:14.02,lon:108.0,kieu:["nui","van-hoa"],dep:[11,12],tranh:[7,8],chi:800,ngay:2,
+  mo:"Biển Hồ, đồi chè Biển Hồ, núi lửa Chư Đăng Ya phủ dã quỳ.",le:{t:[11],x:"Lễ hội hoa dã quỳ núi lửa Chư Đăng Ya (tháng 11)"},nhan:{t:[11],x:"Dã quỳ vàng rực núi lửa"},mon:["Phở khô Gia Lai","Bò một nắng"],
+  goi:["Núi lửa Chư Đăng Ya","Biển Hồ","Đồi chè Biển Hồ"]},
+ {id:"phuyen",ten:"Gành Đá Đĩa – Phú Yên",tinh:"daklak",cu:"Phú Yên",lat:13.36,lon:109.29,kieu:["bien"],dep:[2,3,4,5,6,7,8],tranh:[10,11,12],chi:900,ngay:2,
+  mo:"Đất \"hoa vàng cỏ xanh\": Gành Đá Đĩa, Mũi Điện, đầm Ô Loan, Bãi Xép.",mon:["Mắt cá ngừ đại dương","Bánh hỏi lòng heo","Sò huyết Ô Loan"],goi:["Gành Đá Đĩa","Đón bình minh Mũi Điện","Bãi Xép"]},
+ {id:"buonmathuot",ten:"Buôn Ma Thuột",tinh:"daklak",lat:12.67,lon:108.04,kieu:["van-hoa","sinh-thai"],dep:[12,1,2,3],tranh:[],chi:800,ngay:2,
+  mo:"Thủ phủ cà phê: Bảo tàng Thế giới Cà phê, hồ Lắk, buôn Đôn, thác Dray Nur.",nhan:{t:[2,3],x:"Hoa cà phê nở trắng"},mon:["Bún đỏ","Gà nướng bản Đôn","Cà phê"],goi:["Bảo tàng Thế giới Cà phê","Hồ Lắk","Thác Dray Nur"]},
+ {id:"nhatrang",ten:"Nha Trang",tinh:"khanhhoa",lat:12.24,lon:109.19,kieu:["bien","pho"],dep:[1,2,3,4,5,6,7,8],tranh:[10,11],chi:1300,ngay:3,
+  mo:"Vịnh biển đẹp, đảo Hòn Mun lặn san hô, tháp Bà Ponagar, tắm bùn khoáng.",mon:["Bún chả cá","Nem nướng Ninh Hòa","Bánh căn"],goi:["Tour 4 đảo, lặn Hòn Mun","Tháp Bà Ponagar","Tắm bùn khoáng"]},
+ {id:"vinhhy",ten:"Vịnh Vĩnh Hy",tinh:"khanhhoa",cu:"Ninh Thuận",lat:11.72,lon:109.19,kieu:["bien"],dep:[1,2,3,4,5,6,7,8,9],tranh:[11],chi:900,ngay:2,
+  mo:"Vùng nắng gió ít mưa nhất cả nước: vịnh Vĩnh Hy, Hang Rái, đồi cát Nam Cương, tháp Chàm Pô Klong Garai.",mon:["Dê nướng","Bánh căn","Nho Ninh Thuận"],goi:["Hang Rái lúc bình minh","Đi tàu đáy kính vịnh Vĩnh Hy","Đồi cát Nam Cương"]},
+ {id:"dalat",ten:"Đà Lạt",tinh:"lamdong",lat:11.94,lon:108.44,kieu:["nui","pho"],dep:[11,12,1,2,3],tranh:[],chi:1100,ngay:3,
+  mo:"Thành phố ngàn hoa, khí hậu mát quanh năm. Tháng 5–10 hay mưa chiều.",nhan:{t:[11],x:"Tháng 11 dã quỳ và cỏ hồng; tháng 1–2 mai anh đào"},mon:["Bánh căn","Lẩu gà lá é","Bánh tráng nướng","Sữa đậu nành nóng"],
+  goi:["Săn mây đồi chè Cầu Đất","Hồ Tuyền Lâm","Chợ đêm Đà Lạt","Đồi cỏ hồng"]},
+ {id:"muine",ten:"Mũi Né",tinh:"lamdong",cu:"Bình Thuận",lat:10.93,lon:108.28,kieu:["bien"],dep:[12,1,2,3,4],tranh:[],chi:1000,ngay:2,
+  mo:"Đồi cát bay, đồi cát trắng, suối Tiên, làng chài. Gió mạnh mùa khô, hợp lướt ván diều.",mon:["Bánh căn Phan Thiết","Gỏi cá mai","Nước mắm"],goi:["Đồi cát trắng lúc bình minh","Suối Tiên","Làng chài Mũi Né"]},
+ {id:"tadung",ten:"Hồ Tà Đùng",tinh:"lamdong",cu:"Đắk Nông",lat:11.88,lon:107.95,kieu:["sinh-thai","nui"],dep:[7,8,9,12,1],tranh:[],chi:800,ngay:2,mo:"\"Vịnh Hạ Long của Tây Nguyên\" với hàng chục đảo nhỏ trên hồ.",mon:["Cá lăng hồ","Gà nướng"],goi:["Ngắm hồ lúc bình minh","Đi thuyền giữa các đảo"]},
+ // --- Miền Nam ---
+ {id:"cattien",ten:"Vườn quốc gia Nam Cát Tiên",tinh:"dongnai",lat:11.43,lon:107.42,kieu:["sinh-thai"],dep:[12,1,2,3,4],tranh:[],chi:800,ngay:2,mo:"Rừng nguyên sinh, bàu Sấu, ngắm thú đêm.",mon:["Cá lăng sông Đồng Nai"],goi:["Bàu Sấu","Xem thú đêm","Cây tung cổ thụ"]},
+ {id:"nuiba",ten:"Núi Bà Đen",tinh:"tayninh",lat:11.38,lon:106.17,kieu:["tam-linh","nui"],dep:[1,2,12,3],tranh:[],chi:700,ngay:1,
+  mo:"Nóc nhà Nam Bộ, cáp treo lên đỉnh, tượng Phật Bà bằng đồng trên đỉnh núi.",le:{t:[2],x:"Hội Xuân núi Bà (tháng Giêng)"},mon:["Bánh tráng phơi sương Trảng Bàng","Bánh canh Trảng Bàng"],goi:["Cáp treo lên đỉnh","Tòa Thánh Cao Đài"]},
+ {id:"saigon",ten:"Sài Gòn",tinh:"hcm",lat:10.78,lon:106.70,kieu:["pho","van-hoa"],dep:[12,1,2,3],tranh:[],chi:1300,ngay:2,
+  mo:"Dinh Độc Lập, nhà thờ Đức Bà, chợ Bến Thành, phố đi bộ Nguyễn Huệ, địa đạo Củ Chi.",mon:["Cơm tấm","Hủ tiếu","Bánh mì","Ốc"],goi:["Dinh Độc Lập","Địa đạo Củ Chi","Phố đi bộ Nguyễn Huệ","Ăn ốc tối Quận 4"]},
+ {id:"vungtau",ten:"Vũng Tàu – Long Hải",tinh:"hcm",cu:"Bà Rịa - Vũng Tàu",lat:10.35,lon:107.08,kieu:["bien"],dep:[12,1,2,3,4],tranh:[],chi:1000,ngay:2,mo:"Biển gần TP. Hồ Chí Minh nhất, tượng Chúa Kitô, ngọn hải đăng.",mon:["Bánh khọt","Lẩu cá đuối"],goi:["Tượng Chúa Kitô","Hải đăng Vũng Tàu","Bãi Sau"]},
+ {id:"condao",ten:"Côn Đảo",tinh:"hcm",cu:"Bà Rịa - Vũng Tàu",lat:8.68,lon:106.61,kieu:["bien","tam-linh"],dep:[3,4,5,6],tranh:[11,12,1],chi:1600,ngay:3,
+  mo:"Biển hoang sơ, nghĩa trang Hàng Dương, nhà tù Côn Đảo. Mùa rùa đẻ trứng từ tháng 5 đến tháng 10.",nhan:{t:[5,6],x:"Bắt đầu mùa rùa biển lên đẻ trứng"},mon:["Ốc vú nàng","Bánh lá dứa"],goi:["Viếng mộ chị Võ Thị Sáu","Bãi Đầm Trầu","Xem rùa đẻ ở Hòn Bảy Cạnh"]},
+ {id:"saddec",ten:"Làng hoa Sa Đéc",tinh:"dongthap",lat:10.29,lon:105.76,kieu:["sinh-thai","van-hoa"],dep:[12,1],tranh:[],chi:600,ngay:1,mo:"Làng hoa trăm năm, nhà cổ Huỳnh Thủy Lê.",nhan:{t:[12,1],x:"Hoa rộ trước Tết"},mon:["Hủ tiếu Sa Đéc"],goi:["Làng hoa Tân Quy Đông","Nhà cổ Huỳnh Thủy Lê"]},
+ {id:"tramchim",ten:"Tràm Chim – mùa nước nổi",tinh:"dongthap",lat:10.71,lon:105.55,kieu:["sinh-thai"],dep:[9,10,11],tranh:[],chi:600,ngay:1,mo:"Vườn quốc gia đất ngập nước, ngắm chim, đồng sen.",nhan:{t:[9,10,11],x:"Mùa nước nổi, cá linh, bông điên điển"},mon:["Lẩu cá linh bông điên điển","Cơm sen"],goi:["Đi xuồng ngắm chim","Đồng sen Tháp Mười"]},
+ {id:"thoison",ten:"Cù lao Thới Sơn – Mỹ Tho",tinh:"dongthap",cu:"Tiền Giang",lat:10.34,lon:106.37,kieu:["sinh-thai"],dep:[5,6,7,8,12,1],tranh:[],chi:600,ngay:1,mo:"Đi xuồng rạch dừa, nghe đờn ca tài tử, vườn trái cây.",nhan:{t:[5,6,7],x:"Mùa trái cây"},mon:["Hủ tiếu Mỹ Tho","Trái cây miệt vườn"],goi:["Xuồng ba lá rạch dừa","Nghe đờn ca tài tử"]},
+ {id:"bentre",ten:"Xứ dừa Bến Tre",tinh:"vinhlong",cu:"Bến Tre",lat:10.24,lon:106.37,kieu:["sinh-thai"],dep:[5,6,7,8,12,1],tranh:[],chi:600,ngay:1,mo:"Rừng dừa, cồn Phụng, làng nghề kẹo dừa.",mon:["Kẹo dừa","Đuông dừa","Bánh xèo"],goi:["Cồn Phụng","Xem làm kẹo dừa"]},
+ {id:"caibe",ten:"Chợ nổi Cái Răng",tinh:"cantho",lat:10.0,lon:105.75,kieu:["sinh-thai","pho"],dep:[12,1,2,3,9,10,11],tranh:[],chi:800,ngay:2,
+  mo:"Chợ nổi lớn nhất miền Tây, bến Ninh Kiều, vườn trái cây Phong Điền.",mon:["Bánh xèo","Lẩu mắm","Hủ tiếu trên ghe"],goi:["Chợ nổi Cái Răng lúc 5–6 giờ sáng","Bến Ninh Kiều tối","Vườn trái cây Phong Điền"]},
+ {id:"soctrang",ten:"Chùa Khmer Sóc Trăng",tinh:"cantho",cu:"Sóc Trăng",lat:9.6,lon:105.97,kieu:["van-hoa","tam-linh"],dep:[11,12,1],tranh:[],chi:600,ngay:1,
+  mo:"Chùa Dơi, chùa Chén Kiểu, chùa Đất Sét.",le:{t:[11],x:"Lễ hội Óc Om Bóc – đua ghe Ngo (rằm tháng 10 âm lịch)"},mon:["Bún nước lèo","Bánh pía"],goi:["Chùa Dơi","Chùa Chén Kiểu","Xem đua ghe Ngo"]},
+ {id:"phuquoc",ten:"Phú Quốc",tinh:"angiang",cu:"Kiên Giang",lat:10.22,lon:103.96,kieu:["bien"],dep:[11,12,1,2,3,4],tranh:[7,8,9],chi:1600,ngay:4,
+  mo:"Đảo ngọc: Bãi Sao, Hòn Thơm cáp treo vượt biển, Nam đảo lặn san hô, Bắc đảo hoang sơ.",nhan:{t:[11,12],x:"Bắt đầu mùa khô, biển phía Tây lặng"},mon:["Gỏi cá trích","Bún quậy","Ghẹ Hàm Ninh"],
+  goi:["Cáp treo Hòn Thơm","Lặn san hô Nam đảo","Hoàng hôn Dinh Cậu","Chợ đêm Phú Quốc"]},
+ {id:"chaudoc",ten:"Châu Đốc – núi Sam",tinh:"angiang",lat:10.68,lon:105.08,kieu:["tam-linh","van-hoa"],dep:[5,9,10,11],tranh:[],chi:700,ngay:2,
+  mo:"Miếu Bà Chúa Xứ, rừng tràm Trà Sư, làng Chăm Châu Giang.",le:{t:[5,6],x:"Vía Bà Chúa Xứ núi Sam (tháng 4 âm lịch)"},nhan:{t:[9,10,11],x:"Rừng tràm Trà Sư mùa nước nổi xanh ngắt"},mon:["Bún cá Châu Đốc","Mắm Châu Đốc","Lẩu cá linh"],
+  goi:["Miếu Bà Chúa Xứ","Rừng tràm Trà Sư","Chợ mắm Châu Đốc"]},
+ {id:"hatien",ten:"Hà Tiên",tinh:"angiang",cu:"Kiên Giang",lat:10.38,lon:104.49,kieu:["bien","van-hoa"],dep:[12,1,2,3],tranh:[8,9],chi:800,ngay:2,mo:"Thạch Động, Mũi Nai, lăng Mạc Cửu, cửa ngõ đi Phú Quốc.",mon:["Bánh canh ghẹ","Ghẹ Hà Tiên"],goi:["Mũi Nai","Thạch Động","Chợ đêm Hà Tiên"]},
+ {id:"muicamau",ten:"Mũi Cà Mau",tinh:"camau",lat:8.6,lon:104.72,kieu:["sinh-thai"],dep:[12,1,2,3,4],tranh:[],chi:800,ngay:2,mo:"Điểm cực Nam Tổ quốc, rừng đước, cột mốc tọa độ.",mon:["Cua Cà Mau","Ba khía","Lẩu mắm U Minh"],goi:["Cột mốc tọa độ GPS 0001","Rừng đước"]},
+ {id:"baclieu",ten:"Bạc Liêu",tinh:"camau",cu:"Bạc Liêu",lat:9.29,lon:105.72,kieu:["van-hoa"],dep:[12,1,2,3],tranh:[],chi:700,ngay:1,mo:"Nhà Công tử Bạc Liêu, cánh đồng điện gió, quê hương cố nhạc sĩ Cao Văn Lầu.",mon:["Bánh tằm khoai mì","Bún bò cay"],goi:["Nhà Công tử Bạc Liêu","Cánh đồng điện gió"]},
+];
+const TMAP = Object.fromEntries(TINH.map(t=>[t.id,t]));
+
+/* ===== Chấm điểm theo tháng ===== */
+function cham(d,m){
+  const ly=[]; let s;
+  if(d.dep.includes(m)){s=88;ly.push(["Mùa đẹp nhất",88,"good"])}
+  else if(d.tranh.includes(m)){s=28;ly.push(["Mùa nên tránh (mưa, bão hoặc biển động)",28,"bad"])}
+  else{s=62;ly.push(["Đi được, không phải mùa đẹp nhất",62,""])}
+  if(d.le && d.le.t.includes(m)){s+=8;ly.push(["Đang có lễ hội",8,"fest"])}
+  if(d.nhan && d.nhan.t.includes(m) && d.dep.includes(m)){s+=4;ly.push(["Đúng điểm nhấn của mùa",4,"good"])}
+  if(d.kieu.includes("bien") && [6,7,8].includes(m)){s-=6;ly.push(["Cao điểm hè, đông khách, giá phòng cao",-6,"bad"])}
+  if(m===2 && !d.kieu.includes("tam-linh")){s-=4;ly.push(["Dịp Tết, nhiều nơi đóng cửa, giá tăng",-4,"bad"])}
+  return {s:Math.max(0,Math.min(100,s)),ly};
+}
+function mau(s){return s>=80?"var(--jade)":s>=50?"var(--marigold)":"var(--low)"}
+function mauNen(s){return s>=80?"var(--jade-soft)":s>=50?"var(--marigold-soft)":"var(--bg)"}
+function mauThang(d,m){return d.dep.includes(m)?"var(--jade)":d.tranh.includes(m)?"var(--low)":"var(--marigold)"}
+const ten = id => TMAP[id].ten;
+const vitri = d => ten(d.tinh) + (d.cu?` (trước là ${d.cu})`:"");
+const tien = n => (n/1000).toLocaleString("vi-VN",{maximumFractionDigits:1})+" triệu";
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* ===== Trạng thái ===== */
+const NOW = new Date().getMonth()+1;
+let st = {m:NOW, vung:"", kieu:"", tinh:"", q:""};
+try{const r=JSON.parse(localStorage.getItem("ddmn")||"{}"); if(r.m) st.m=r.m;}catch(e){}
+function save(){try{localStorage.setItem("ddmn",JSON.stringify({m:st.m}))}catch(e){}}
+const $ = id => document.getElementById(id);
+
+/* ===== Thanh tháng ===== */
+function veThang(){
+  $("months").innerHTML = Array.from({length:12},(_,i)=>i+1).map(m=>
+    `<button aria-pressed="${m===st.m}" data-m="${m}">Tháng ${m}${m===NOW?'<span class="now" title="Tháng hiện tại"></span>':""}</button>`).join("");
+}
+$("months").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;st.m=+b.dataset.m;save();veTatCa()});
+
+/* ===== Top 5 ===== */
+function veTop(){
+  $("heroTitle").innerHTML = `Tháng ${st.m} <em>đi đâu?</em>`;
+  $("stripMonth").textContent = `điểm cao nhất tháng ${st.m}`;
+  const ds = D.map(d=>({d,c:cham(d,st.m)})).sort((a,b)=>b.c.s-a.c.s).slice(0,6);
+  $("top5").innerHTML = ds.map((x,i)=>{
+    const ly = x.d.le&&x.d.le.t.includes(st.m)?x.d.le.x:(x.d.nhan&&x.d.nhan.t.includes(st.m)?x.d.nhan.x:"Mùa đẹp nhất trong năm");
+    return `<li><button data-id="${x.d.id}"><span class="rank">${i+1}</span>
+      <span style="min-width:0"><div class="t-name">${esc(x.d.ten)}</div><div class="t-sub">${esc(ten(x.d.tinh))} · ${esc(ly)}</div></span>
+      <span class="score num" style="color:${mau(x.c.s)}">${x.c.s}<small>/100</small></span></button></li>`}).join("");
+}
+$("top5").addEventListener("click",e=>{const b=e.target.closest("button");if(b)moChiTiet(b.dataset.id)});
+
+/* ===== Dải chữ S ===== */
+function veDai(){
+  let html="", vt="";
+  TINH.forEach(t=>{
+    if(t.vung!==vt){vt=t.vung;html+=`<div class="reg-label">${VUNG[vt]}</div>`}
+    const ds = D.filter(d=>d.tinh===t.id);
+    const best = ds.length?Math.max(...ds.map(d=>cham(d,st.m).s)):0;
+    const cu = t.cu.length?`<i>+ ${t.cu.join(", ")}</i>`:"";
+    html+=`<button class="prov" data-t="${t.id}" aria-pressed="${st.tinh===t.id}" title="${esc(t.ten)}${t.cu.length?" – gồm cả "+esc(t.cu.join(", ")):""}">
+      <span class="nm">${t.tp?"TP. ":""}${esc(t.ten.replace("TP. ",""))}${cu}</span>
+      <span class="bar"><span style="width:${best}%;background:${mau(best)}"></span></span>
+      <span class="v num">${best||"–"}</span></button>`;
+  });
+  $("strip").innerHTML=html;
+}
+$("strip").addEventListener("click",e=>{const b=e.target.closest(".prov");if(!b)return;st.tinh=st.tinh===b.dataset.t?"":b.dataset.t;veDai();veLuoi()});
+
+/* ===== Bộ lọc ===== */
+function veLoc(){
+  $("vungChips").innerHTML = [["","Cả nước"],...Object.entries(VUNG).map(([k,v])=>[k,v.replace(" và Tây Nguyên","")])]
+    .map(([k,v])=>`<button class="chip" data-v="${k}" aria-pressed="${st.vung===k}">${v}</button>`).join("");
+  $("kieuChips").innerHTML = [["","Mọi kiểu"],...Object.entries(KIEU)]
+    .map(([k,v])=>`<button class="chip" data-k="${k}" aria-pressed="${st.kieu===k}">${v}</button>`).join("");
+}
+$("vungChips").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;st.vung=b.dataset.v;veLoc();veLuoi()});
+$("kieuChips").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;st.kieu=b.dataset.k;veLoc();veLuoi()});
+$("q").addEventListener("input",e=>{st.q=e.target.value;veLuoi()});
+const boDau = s => s.normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/đ/g,"d").replace(/Đ/g,"D").toLowerCase();
+
+/* ===== Lưới điểm đến ===== */
+function veLuoi(){
+  const q = boDau(st.q.trim());
+  let ds = D.filter(d=>{
+    const t=TMAP[d.tinh];
+    if(st.vung && t.vung!==st.vung) return false;
+    if(st.kieu && !d.kieu.includes(st.kieu)) return false;
+    if(st.tinh && d.tinh!==st.tinh) return false;
+    if(q){const hay=boDau([d.ten,t.ten,d.cu||"",...t.cu,d.mo,...d.mon].join(" "));if(!hay.includes(q))return false}
+    return true;
+  }).map(d=>({d,c:cham(d,st.m)})).sort((a,b)=>b.c.s-a.c.s);
+  const af=$("activeFilter");
+  if(st.tinh){af.hidden=false;const t=TMAP[st.tinh];af.innerHTML=`Đang xem: <b>${esc(t.ten)}</b>${t.cu.length?" (gồm cả "+esc(t.cu.join(", "))+" cũ)":""} <button id="clrT">Bỏ lọc tỉnh ✕</button>`;$("clrT").onclick=()=>{st.tinh="";veDai();veLuoi()}}
+  else af.hidden=true;
+  if(!ds.length){$("grid").innerHTML=`<div class="empty" style="grid-column:1/-1">Chưa có điểm đến khớp bộ lọc. Thử bỏ bớt điều kiện hoặc gõ tên khác.</div>`;return}
+  $("grid").innerHTML = ds.map(({d,c})=>{
+    const tags=[];
+    if(d.le&&d.le.t.includes(st.m)) tags.push(`<span class="tag fest">Có lễ hội</span>`);
+    if(d.dep.includes(st.m)) tags.push(`<span class="tag good">Mùa đẹp</span>`);
+    if(d.tranh.includes(st.m)) tags.push(`<span class="tag bad">Nên tránh</span>`);
+    d.kieu.forEach(k=>tags.push(`<span class="tag">${KIEU[k]}</span>`));
+    const note = d.le&&d.le.t.includes(st.m)?d.le.x:(d.nhan&&d.nhan.t.includes(st.m)?d.nhan.x:"");
+    return `<button class="card" data-id="${d.id}">
+      <div class="card-top"><div style="min-width:0"><h3>${esc(d.ten)}</h3><div class="loc">${esc(vitri(d))}</div></div>
+      <span class="badge num" style="background:${mauNen(c.s)};color:${mau(c.s)}">${c.s}</span></div>
+      <div class="cal" aria-label="Lịch mùa 12 tháng">${Array.from({length:12},(_,i)=>`<span class="${i+1===st.m?"cur":""}" style="background:${mauThang(d,i+1)}"></span>`).join("")}</div>
+      ${note?`<p class="note">${esc(note)}</p>`:""}
+      <div class="tags">${tags.join("")}</div></button>`}).join("");
+}
+$("grid").addEventListener("click",e=>{const b=e.target.closest(".card");if(b)moChiTiet(b.dataset.id)});
+
+/* ===== Chi tiết ===== */
+function moChiTiet(id){
+  const d=D.find(x=>x.id===id), c=cham(d,st.m), tn=ten(d.tinh);
+  const tim = encodeURIComponent;
+  const ggl = q=>`https://www.google.com/maps/search/?api=1&query=${tim(q)}`;
+  $("sheet").innerHTML=`
+    <button class="close" id="closeSheet">Đóng</button>
+    <div class="loc">${esc(vitri(d))} · ${VUNG[TMAP[d.tinh].vung]}</div>
+    <h2 id="sheetTitle">${esc(d.ten)}</h2>
+    <p>${esc(d.mo)}</p>
+    <h4>Điểm "Đáng đi" tháng ${st.m}: <span class="num" style="color:${mau(c.s)};font-size:16px">${c.s}/100</span></h4>
+    <ul class="why">${c.ly.map(([t,v],i)=>`<li><span>${esc(t)}</span><b class="num" style="color:${v<0?"var(--warn)":"var(--ink)"}">${i>0&&v>0?"+":""}${v}</b></li>`).join("")}</ul>
+    <h4>Lịch mùa trong năm</h4>
+    <div class="bigcal">${Array.from({length:12},(_,i)=>{const m=i+1;const bg=d.dep.includes(m)?"var(--jade)":d.tranh.includes(m)?"var(--low)":"var(--marigold-soft)";const fg=d.dep.includes(m)?"#fff":"var(--ink)";return `<div class="${m===st.m?"cur":""}" style="background:${bg};color:${fg}">T${m}</div>`}).join("")}</div>
+    ${d.nhan?`<p class="hint">Điểm nhấn: ${esc(d.nhan.x)}</p>`:""}
+    ${d.le?`<p class="hint">Lễ hội: ${esc(d.le.x)}</p>`:""}
+    <h4>Chuyến đi</h4>
+    <div class="facts">
+      <div><b class="num">${d.ngay}</b><span>ngày nên ở</span></div>
+      <div><b class="num">${tien(d.chi)}</b><span>ăn ở mỗi người mỗi ngày (tầm trung)</span></div>
+      <div><b class="num">${tien(d.chi*d.ngay)}</b><span>ăn ở cả chuyến, chưa gồm đi lại</span></div>
+    </div>
+    <h4>Nên làm</h4><ul class="plain">${d.goi.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
+    <h4>Món phải thử</h4><div class="tags">${d.mon.map(x=>`<span class="tag good">${esc(x)}</span>`).join("")}</div>
+    <h4>Nhà hàng, khách sạn, quán ăn</h4>
+    <div class="links">
+      <a href="${ggl("nhà hàng "+d.ten+" "+tn)}" target="_blank" rel="noopener">Nhà hàng quanh ${esc(d.ten)} <span>Google Maps ↗</span></a>
+      <a href="${ggl(d.mon[0]+" "+d.ten+" "+tn)}" target="_blank" rel="noopener">Quán ${esc(d.mon[0].toLowerCase())} ngon <span>Google Maps ↗</span></a>
+      <a href="${ggl("khách sạn "+d.ten+" "+tn)}" target="_blank" rel="noopener">Khách sạn, nhà nghỉ quanh đây <span>Google Maps ↗</span></a>
+      <a href="https://www.booking.com/searchresults.vi.html?ss=${tim(d.ten+", "+tn+", Việt Nam")}" target="_blank" rel="noopener">So giá phòng <span>Booking ↗</span></a>
+    </div>
+    <p class="hint">Mẹo: khi xem kết quả, đưa điểm sao và số lượt đánh giá vào "Máy chấm điểm uy tín" ở cuối trang để so cho công bằng. Hỏi giá trước khi gọi món ở khu đông khách.</p>`;
+  $("sheetBg").hidden=false; $("closeSheet").focus();
+  $("closeSheet").onclick=dongChiTiet;
+}
+function dongChiTiet(){$("sheetBg").hidden=true}
+$("sheetBg").addEventListener("click",e=>{if(e.target.id==="sheetBg")dongChiTiet()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")dongChiTiet()});
+
+/* ===== Lập lịch trình ===== */
+function kc(a,b){const R=6371,r=x=>x*Math.PI/180;const dLa=r(b.lat-a.lat),dLo=r(b.lon-a.lon);
+  const h=Math.sin(dLa/2)**2+Math.cos(r(a.lat))*Math.cos(r(b.lat))*Math.sin(dLo/2)**2;return 2*R*Math.asin(Math.sqrt(h))*1.3}
+function diLai(km){ // khứ hồi, mỗi người, nghìn đồng
+  if(km<250) return {cach:"ô tô hoặc xe khách",gio:Math.round(km/50*10)/10,tien:Math.round(km*2*1.2/10)*10+100};
+  if(km<650) return {cach:"xe giường nằm hoặc tàu hỏa",gio:Math.round(km/45),tien:Math.round(km*2*1.0/10)*10+150};
+  return {cach:"máy bay",gio:2,tien:2600};
+}
+$("pFrom").innerHTML = TINH.map(t=>`<option value="${t.id}" ${t.id==="quangninh"?"selected":""}>${esc(t.ten)}</option>`).join("");
+function lapLich(){
+  const from=TMAP[$("pFrom").value], days=+$("pDays").value, bud=(+$("pBudget").value||0)*1000, kieu=$("pKieu").value, who=$("pWho").value, m=st.m;
+  const ung = D.map(d=>{
+    const k=kc(from,d), dl=diLai(k), c=cham(d,m).s;
+    let diem=c;
+    if(kieu && !d.kieu.includes(kieu)) diem-=40;
+    if(dl.cach==="máy bay" && days<=2) diem-=30;
+    if(dl.cach!=="ô tô hoặc xe khách" && days<=2) diem-=15;
+    if(who!=="ban" && d.kieu.includes("nui") && ["tuyenquang","laichau","sonla","caobang"].includes(d.tinh)) diem-=15;
+    const tong = dl.tien + d.chi*Math.max(1,days-(dl.gio>6?1:0));
+    if(tong>bud) diem-=Math.min(40,(tong-bud)/bud*60);
+    return {d,dl,k,c,diem,tong};
+  }).sort((a,b)=>b.diem-a.diem);
+  const chinh=ung[0];
+  // ghép thêm điểm gần nhau (dưới 150 km) nếu đủ ngày
+  const kem=[]; let conNgay=days-chinh.d.ngay-(chinh.dl.gio>6?1:0);
+  for(const x of ung.slice(1)){
+    if(conNgay<1) break;
+    if(kc(chinh.d,x.d)/1.3<150 && x.c>=60 && (!kieu||x.d.kieu.includes(kieu))){kem.push(x);conNgay-=Math.min(x.d.ngay,conNgay)}
+  }
+  const chuoi=[chinh,...kem];
+  // phân ngày
+  const lich=[]; let n=1; const goi=chuoi.flatMap(x=>x.d.goi.map(g=>({g,d:x.d})));
+  const ngayDi = chinh.dl.gio>6;
+  if(ngayDi){lich.push([n++,`Đi ${chinh.dl.cach} từ ${from.ten} tới ${ten(chinh.d.tinh)} (khoảng ${chinh.dl.gio} giờ). Nhận phòng, ăn tối ${chinh.d.mon[0].toLowerCase()}.`])}
+  let gi=0;
+  while(n<=days){
+    const cuoi=n===days;
+    const hom=goi.slice(gi,gi+2); gi+=2;
+    let txt = hom.length?hom.map(x=>x.g+(chuoi.length>1?` (${x.d.ten})`:"")).join(". ")+".":"Thong thả dạo chơi, mua đặc sản.";
+    if(n===1&&!ngayDi) txt=`Sáng xuất phát từ ${from.ten} bằng ${chinh.dl.cach} (khoảng ${chinh.dl.gio} giờ). `+txt;
+    if(cuoi) txt+=` Chiều mua đặc sản rồi về ${from.ten}.`;
+    lich.push([n++,txt]);
+  }
+  const anO = chinh.d.chi*days;
+  const tong = chinh.dl.tien + anO;
+  const vuot = tong>bud;
+  const lyDo=[]; if(chinh.d.dep.includes(m))lyDo.push("đang mùa đẹp nhất"); if(chinh.d.le&&chinh.d.le.t.includes(m))lyDo.push(chinh.d.le.x.toLowerCase());
+  if(chinh.d.nhan&&chinh.d.nhan.t.includes(m))lyDo.push(chinh.d.nhan.x.toLowerCase());
+  $("plan").innerHTML=`
+    <h4>${esc(chuoi.map(x=>x.d.ten).join(" + "))}</h4>
+    <div class="sum"><span>Tháng ${m}: <b class="num">${chinh.c}/100</b></span><span>Đi lại: <b>${chinh.dl.cach}</b></span>
+      <span>Ước tính mỗi người: <b class="num" style="color:${vuot?"var(--warn)":"var(--jade)"}">${tien(tong)}</b> (đi lại ${tien(chinh.dl.tien)}, ăn ở ${tien(anO)})</span></div>
+    ${lyDo.length?`<p class="hint" style="margin-top:0">Vì sao chọn: ${esc(lyDo.join("; "))}.</p>`:""}
+    ${vuot?`<p class="hint" style="color:var(--warn)">Ngân sách ${tien(bud)} hơi thiếu cho chuyến này. Tăng ngân sách hoặc giảm số ngày để trang tìm nơi gần hơn.</p>`:""}
+    ${lich.map(([i,t])=>`<div class="day"><div class="dl">Ngày ${i}</div><p>${esc(t)}</p></div>`).join("")}
+    <p class="hint">Phương án khác cùng tháng: ${ung.slice(1,4).filter(x=>!kem.includes(x)).map(x=>`<a href="#" data-id="${x.d.id}" style="color:var(--jade)">${esc(x.d.ten)}</a>`).join(", ")}</p>`;
+  $("plan").querySelectorAll("a[data-id]").forEach(a=>a.onclick=e=>{e.preventDefault();moChiTiet(a.dataset.id)});
+}
+$("pGo").addEventListener("click",lapLich);
+
+/* ===== Máy chấm điểm uy tín ===== */
+const MAU = [["Quán A (ví dụ)",5.0,12],["Quán B (ví dụ)",4.6,2140],["Quán C (ví dụ)",4.8,310]];
+$("rateRows").innerHTML = MAU.map((r,i)=>`<div class="rate-row">
+  <input id="rn${i}" value="${r[0]}" aria-label="Tên ${i+1}"><input id="rs${i}" type="number" step="0.1" min="1" max="5" value="${r[1]}" aria-label="Số sao ${i+1}">
+  <input id="rc${i}" type="number" min="0" value="${r[2]}" aria-label="Số lượt ${i+1}"></div>`).join("");
+function chamUyTin(){
+  const C=4.0, M=200;
+  const kq = MAU.map((_,i)=>{const s=+$("rs"+i).value||0,n=+$("rc"+i).value||0;return {ten:$("rn"+i).value||`Nơi ${i+1}`,s,n,u:(n*s+M*C)/(n+M)}}).filter(x=>x.s>0);
+  const max=Math.max(...kq.map(x=>x.u));
+  $("rateOut").innerHTML = kq.sort((a,b)=>b.u-a.u).map(x=>`<div class="${x.u===max?"win":""}"><span>${esc(x.ten)} <span style="color:var(--muted);font-size:12.5px">· ${x.s.toLocaleString("vi-VN")} sao, ${x.n.toLocaleString("vi-VN")} lượt</span></span><b class="num">${x.u.toFixed(2).replace(".",",")}</b></div>`).join("");
+}
+$("rateRows").addEventListener("input",chamUyTin);
+
+/* ===== Khởi động ===== */
+function veTatCa(){veThang();veTop();veDai();veLuoi()}
+veLoc(); veTatCa(); chamUyTin(); lapLich();
+</script>
+
+</body>
+</html>
